@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon, Menu, X } from "lucide-react";
 
 const links = [
@@ -75,28 +74,21 @@ export default function Navbar() {
         </div>
       </nav>
 
-      <AnimatePresence>
-        {open && (
-          <motion.ul
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden overflow-hidden backdrop-blur-xl bg-base/90 border-b border-line"
-          >
-            {links.map((l, i) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="block px-6 py-3 font-mono text-sm text-mut hover:text-accent transition-colors"
-                >
-                  <span className="text-accent">0{i + 1}.</span> {l.label}
-                </a>
-              </li>
-            ))}
-          </motion.ul>
-        )}
-      </AnimatePresence>
+      <div className={`md:hidden collapse-grid${open ? " collapse-open" : ""}`}>
+        <ul className="overflow-hidden backdrop-blur-xl bg-base/90 border-b border-line" inert={!open || undefined}>
+          {links.map((l, i) => (
+            <li key={l.href}>
+              <a
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="block px-6 py-3 font-mono text-sm text-mut hover:text-accent transition-colors"
+              >
+                <span className="text-accent">0{i + 1}.</span> {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </header>
   );
 }

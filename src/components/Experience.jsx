@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence, useInView, animate } from "framer-motion";
 import { MapPin, Calendar, ChevronDown, Building2 } from "lucide-react";
 import Reveal from "./Reveal.jsx";
 import SectionHeading from "./SectionHeading.jsx";
@@ -7,18 +6,38 @@ import { experience, stats } from "../data.js";
 
 function Counter({ value, suffix }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    if (!inView) return;
-    const controls = animate(0, value, {
-      duration: 1.6,
-      ease: "easeOut",
-      onUpdate: (v) => setDisplay(Math.round(v)),
-    });
-    return () => controls.stop();
-  }, [inView, value]);
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setDisplay(value);
+      return;
+    }
+    let raf;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        const start = performance.now();
+        const dur = 1500;
+        const step = (now) => {
+          const t = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+          setDisplay(Math.round(eased * value));
+          if (t < 1) raf = requestAnimationFrame(step);
+        };
+        raf = requestAnimationFrame(step);
+      },
+      { rootMargin: "0px 0px -40px 0px" }
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [value]);
 
   return (
     <span ref={ref} className="font-mono text-3xl md:text-4xl font-bold text-accent">
@@ -33,14 +52,10 @@ function TimelineEntry({ job, index }) {
 
   return (
     <li className="relative pl-10 md:pl-14 pb-12 last:pb-0">
-      {/* Animated dot */}
-      <motion.span
+      {/* Timeline dot */}
+      <span
         aria-hidden="true"
-        initial={{ scale: 0.4, opacity: 0.3, boxShadow: "0 0 0px var(--c-glow)" }}
-        whileInView={{ scale: 1, opacity: 1, boxShadow: "0 0 16px var(--c-glow)" }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="absolute left-0 md:left-2 top-1.5 w-4 h-4 rounded-full bg-accent border-4 border-base"
+        className="absolute left-0 md:left-2 top-1.5 w-4 h-4 rounded-full bg-accent border-4 border-base shadow-[0_0_16px_var(--c-glow)]"
       />
 
       <Reveal y={20}>
@@ -87,29 +102,21 @@ function TimelineEntry({ job, index }) {
             {expanded ? "hide responsibilities" : "show responsibilities"}
           </button>
 
-          <AnimatePresence initial={false}>
-            {expanded && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.35, ease: "easeInOut" }}
-                className="overflow-hidden"
-              >
-                <ul className="mt-3 space-y-2 text-sm text-mut leading-relaxed">
-                  {job.bullets.map((b, i) => (
-                    <li key={i} className="flex gap-2.5">
-                      <span className="text-accent font-mono select-none shrink-0">▹</span>
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-4 font-mono text-xs text-mut/80 border-t border-line pt-3">
-                  <span className="text-accent">env:</span> {job.environment}
-                </p>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <div className={`collapse-grid${expanded ? " collapse-open" : ""}`}>
+            <div className="overflow-hidden">
+              <ul className="mt-3 space-y-2 text-sm text-mut leading-relaxed">
+                {job.bullets.map((b, i) => (
+                  <li key={i} className="flex gap-2.5">
+                    <span className="text-accent font-mono select-none shrink-0">▹</span>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 font-mono text-xs text-mut/80 border-t border-line pt-3">
+                <span className="text-accent">env:</span> {job.environment}
+              </p>
+            </div>
+          </div>
         </article>
       </Reveal>
     </li>

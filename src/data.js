@@ -5,7 +5,7 @@ export const profile = {
     "10+ years designing secure, scalable, enterprise-grade systems with Java, Spring Boot, AWS, and modern front ends — now building payment platforms that move millions of transactions a day, and the GenAI tooling that keeps them running.",
   phone: "281-786-5856",
   email: "suneeluhcl@gmail.com",
-  typingWords: ["Java", "Spring Boot", "Go", "Python", "React", "Angular", "AWS", "Microservices", "GenAI", "AI Agents"],
+  typingWords: ["Java", "Spring Boot", "Go", "Python", "React", "Angular", "AWS", "GCP", "Kubernetes", "Microservices", "GenAI", "AI Agents"],
 };
 
 export const about = [
@@ -160,13 +160,14 @@ export const experience = [
     location: "Denver, CO",
     title: "Java Full Stack Developer",
     dates: "Jul 2018 – May 2020",
-    stack: ["Java 8", "Spring Boot", "Angular 2", "Node.js", "MongoDB", "Oracle", "Docker", "AWS"],
+    stack: ["Java 8", "Spring Boot", "Angular 2", "Node.js", "MongoDB", "Oracle", "Docker", "AWS", "GCP", "GKE"],
     bullets: [
       "Built Angular 2 + Node.js responsive UI modules with component-based architecture and Angular routing.",
       "Integrated BRMS (ILOG JRules) for rule-based decision services.",
-      "Deployed Dockerized microservices on AWS EC2.",
+      "Deployed Dockerized microservices across AWS EC2 and Google Cloud Platform — GKE and Compute Engine — with Cloud Build/Container Registry and Stackdriver monitoring.",
+      "Integrated Cloud Pub/Sub for async messaging and Cloud Storage for object storage, with Cloud SQL alongside MongoDB and Oracle.",
     ],
-    environment: "Java 8, Spring Boot, Angular 2, MongoDB, Oracle, Docker, AWS",
+    environment: "Java 8, Spring Boot, Angular 2, MongoDB, Oracle, Docker, AWS (EC2), Google Cloud Platform (GKE, Compute Engine, Cloud Storage, Cloud Pub/Sub, Cloud SQL, Cloud Build, Container Registry, Stackdriver)",
   },
   {
     company: "Teleflora",
