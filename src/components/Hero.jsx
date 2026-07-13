@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Phone, Mail, ArrowDown, TerminalSquare } from "lucide-react";
 import useTypewriter from "../hooks/useTypewriter.js";
 import { profile } from "../data.js";
+import portrait from "../assets/suneel.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -25,7 +26,8 @@ export default function Hero() {
         <div className="blob w-72 h-72 bg-accent2 bottom-0 left-1/3" style={{ animationDelay: "-9s" }} />
       </div>
 
-      <div className="relative max-w-6xl mx-auto px-5 md:px-8 py-32 w-full">
+      <div className="relative max-w-6xl mx-auto px-5 md:px-8 py-28 lg:py-32 w-full grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-8 items-center">
+        <div>
         <motion.p
           custom={0}
           variants={fadeUp}
@@ -118,6 +120,35 @@ export default function Hero() {
           >
             Contact Me
           </a>
+        </motion.div>
+        </div>
+
+        {/* Portrait */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92, y: 16 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.35, ease: "easeOut" }}
+          className="justify-self-center order-first lg:order-none"
+        >
+          <div className="relative w-44 sm:w-56 lg:w-80">
+            <div
+              aria-hidden="true"
+              className="absolute -inset-5 rounded-full bg-gradient-to-tr from-accent2/45 via-accent/35 to-transparent blur-2xl"
+            />
+            <div className="relative rounded-full p-1.5 bg-gradient-to-tr from-accent via-accent2 to-transparent shadow-[0_0_40px_var(--c-glow)]">
+              <img
+                src={portrait}
+                alt="Suneel Kumar, Sr. Java Fullstack Developer — professional headshot"
+                width="720"
+                height="720"
+                loading="eager"
+                className="rounded-full w-full aspect-square object-cover bg-gradient-to-b from-card-soft to-accent/15"
+              />
+            </div>
+            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3.5 py-1.5 rounded-full border border-line bg-card font-mono text-xs text-accent whitespace-nowrap shadow-lg">
+              10+ yrs <span className="text-mut">·</span> Java <span className="text-mut">·</span> AWS
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
