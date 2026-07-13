@@ -43,6 +43,14 @@ export const skillCategories = [
     ],
   },
   {
+    title: "Cloud (GCP)",
+    icon: "Cloud",
+    items: [
+      "GKE", "Cloud Run", "Cloud Functions", "Pub/Sub", "Cloud Storage", "Cloud SQL",
+      "BigQuery", "Dataflow", "Vertex AI", "Cloud Build", "Artifact Registry", "Secret Manager", "IAM",
+    ],
+  },
+  {
     title: "Data & Streaming",
     icon: "Workflow",
     items: ["Apache Spark", "Apache Kafka", "Apache Flink", "Databricks", "Snowflake", "Microsoft OneLake", "ETL Pipelines"],
@@ -137,13 +145,15 @@ export const experience = [
     location: "Chicago, IL",
     title: "Java Full Stack Application Developer",
     dates: "Jun 2020 – Jul 2021",
-    stack: ["Java 8", "Spring Boot", "Angular 5/6", "MongoDB", "Cassandra", "AWS"],
+    stack: ["Java 8", "Spring Boot", "Angular 5/6", "GCP", "GKE", "BigQuery", "MongoDB", "Cassandra"],
     bullets: [
       "Built SPAs with Angular 6, RxJS, reactive forms, and custom pipes.",
+      "Deployed containerized Spring Boot microservices to Google Kubernetes Engine (GKE) on Google Cloud Platform, with Cloud Build CI/CD and Artifact Registry.",
+      "Built event-driven integrations using Cloud Pub/Sub and Cloud Functions, with Cloud Storage for artifacts and Secret Manager for credentials.",
+      "Modeled operational data across Cloud SQL and Cassandra/MongoDB, and fed analytics datasets into BigQuery for reporting.",
       "Migrated JMS from WebLogic to Apache ActiveMQ with Camel-based async messaging.",
-      "Managed Cassandra NoSQL clusters via DataStax OpsCenter.",
     ],
-    environment: "Java 8, Spring Boot, Angular 5/6, MongoDB, Cassandra, AWS (EC2, S3, SQS, SES)",
+    environment: "Java 8, Spring Boot, Angular 5/6, Google Cloud Platform (GKE, Cloud Run, Pub/Sub, Cloud Functions, Cloud Storage, Cloud SQL, BigQuery, Secret Manager, IAM), MongoDB, Cassandra",
   },
   {
     company: "Essendant",
