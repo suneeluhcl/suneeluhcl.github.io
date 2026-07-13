@@ -199,12 +199,14 @@ export const certifications = [
     issuer: "Amazon Web Services",
     year: "2025",
     icon: "Cloud",
+    url: "https://www.credly.com/badges/22322dd2-cc3f-4696-977f-425373d7abb1/public_url",
   },
   {
     name: "Professional Machine Learning Engineer Certification",
     issuer: "Google Cloud",
     year: "2025",
     icon: "BrainCircuit",
+    url: "https://www.credly.com/badges/3a3d2e61-c00c-4979-b1bf-26f4f7b1b980/public_url",
   },
 ];
 

@@ -1,4 +1,4 @@
-import { Cloud, BrainCircuit, BadgeCheck } from "lucide-react";
+import { Cloud, BrainCircuit, BadgeCheck, ExternalLink } from "lucide-react";
 import Reveal from "./Reveal.jsx";
 import SectionHeading from "./SectionHeading.jsx";
 import { certifications } from "../data.js";
@@ -15,7 +15,13 @@ export default function Certifications() {
           const Icon = icons[cert.icon];
           return (
             <Reveal key={cert.name} delay={i * 0.12}>
-              <article className="glow-hover h-full rounded-xl border border-line bg-card p-6 flex items-start gap-4">
+              <a
+                href={cert.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Verify ${cert.name} on Credly`}
+                className="glow-hover group h-full rounded-xl border border-line bg-card p-6 flex items-start gap-4 transition-colors hover:border-accent/50"
+              >
                 <span className="p-3 rounded-lg bg-accent/10 text-accent shrink-0">
                   <Icon size={22} aria-hidden="true" />
                 </span>
@@ -27,8 +33,12 @@ export default function Certifications() {
                   <p className="mt-1 font-mono text-sm text-mut">
                     {cert.issuer} <span className="text-accent">·</span> {cert.year}
                   </p>
+                  <p className="mt-3 font-mono text-xs text-accent inline-flex items-center gap-1.5 opacity-80 group-hover:opacity-100">
+                    Verify on Credly
+                    <ExternalLink size={13} aria-hidden="true" />
+                  </p>
                 </div>
-              </article>
+              </a>
             </Reveal>
           );
         })}
