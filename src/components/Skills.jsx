@@ -1,6 +1,7 @@
 import {
   Code2, Database, ShieldCheck, Layers, KeyRound, Server,
   Container, Wrench, FlaskConical, Hammer, Cloud,
+  MonitorSmartphone, Workflow, BrainCircuit, Activity,
 } from "lucide-react";
 import Reveal from "./Reveal.jsx";
 import SectionHeading from "./SectionHeading.jsx";
@@ -9,6 +10,7 @@ import { skillCategories } from "../data.js";
 const icons = {
   Code2, Database, ShieldCheck, Layers, KeyRound, Server,
   Container, Wrench, FlaskConical, Hammer, Cloud,
+  MonitorSmartphone, Workflow, BrainCircuit, Activity,
 };
 
 export default function Skills() {
