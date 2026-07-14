@@ -1,0 +1,15 @@
+# worker/wrangler.toml
+name = "portfolio-chat-worker"
+main = "src/index.js"
+compatibility_date = "2025-07-01"
+
+[ai]
+binding = "AI"
+
+[[ratelimits]]
+name = "RATE_LIMITER"
+namespace_id = "2001"
+
+  [ratelimits.simple]
+    limit = 20
+    period = 60
