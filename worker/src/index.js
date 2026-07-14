@@ -49,9 +49,13 @@ export default {
       ...v.messages,
     ];
 
-    const stream = await env.AI.run(MODEL, { messages, stream: true, max_tokens: 512 });
-    return new Response(stream, {
-      headers: { ...cors, "content-type": "text/event-stream" },
-    });
+    try {
+      const stream = await env.AI.run(MODEL, { messages, stream: true, max_tokens: 512 });
+      return new Response(stream, {
+        headers: { ...cors, "content-type": "text/event-stream" },
+      });
+    } catch {
+      return json({ error: "ai_unavailable" }, 502, cors);
+    }
   },
 };

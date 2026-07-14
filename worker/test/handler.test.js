@@ -72,4 +72,20 @@ describe("worker fetch handler", () => {
     const text = await new Response(res.body).text();
     expect(text).toContain("data:");
   });
+
+  it("returns 502 with CORS headers when the AI call fails", async () => {
+    const worker = (await import("../src/index.js")).default;
+    const env = makeEnv({ AI: { run: async () => { throw new Error("model down"); } } });
+    const res = await worker.fetch(post({ messages: [{ role: "user", content: "hi" }] }), env);
+    expect(res.status).toBe(502);
+    expect(res.headers.get("access-control-allow-origin")).toBe("https://suneelkumarbikkasani.com");
+  });
+
+  it("keys the rate limiter by client IP", async () => {
+    const worker = (await import("../src/index.js")).default;
+    let seenKey;
+    const env = makeEnv({ RATE_LIMITER: { limit: async ({ key }) => { seenKey = key; return { success: true }; } } });
+    await worker.fetch(post({ messages: [{ role: "user", content: "hi" }] }), env);
+    expect(seenKey).toBe("1.2.3.4");
+  });
 });
