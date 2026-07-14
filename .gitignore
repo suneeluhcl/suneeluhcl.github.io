@@ -2,3 +2,7 @@ node_modules
 dist
 .DS_Store
 *.local
+
+# Generated résumé context for the chat worker (rebuilt from src/data.js)
+worker/src/generated/resumeContext.js
+worker/node_modules/
