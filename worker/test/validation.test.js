@@ -30,4 +30,11 @@ describe("validateMessages", () => {
   it("rejects bad roles", () => {
     expect(validateMessages([{ role: "system", content: "hi" }]).ok).toBe(false);
   });
+  it("rejects empty content", () => {
+    expect(validateMessages([{ role: "user", content: "" }]).ok).toBe(false);
+  });
+  it("rejects too many messages", () => {
+    const many = Array.from({ length: 21 }, () => ({ role: "user", content: "hi" }));
+    expect(validateMessages(many).ok).toBe(false);
+  });
 });
