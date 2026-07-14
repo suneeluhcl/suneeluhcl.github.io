@@ -3,16 +3,19 @@
 Free Cloudflare Worker backing the "Ask my résumé" widget. Runs Workers AI
 (`@cf/meta/llama-3.1-8b-instruct`) — no paid plan, no API key in the browser.
 
-## One-time setup (human-run)
-1. `cd worker && npm install`
-2. `npx wrangler login`   # opens browser, authorizes YOUR Cloudflare account
-3. Regenerate context:    `node ../scripts/gen-resume-context.mjs`
-4. `npx wrangler deploy`  # prints the https://portfolio-chat-worker.<subdomain>.workers.dev URL
+## One-time setup (from the repo root)
+1. Regenerate the résumé context:
+   `node scripts/gen-resume-context.mjs`
+2. Install worker deps, log in, and deploy:
+   `cd worker && npm install && npx wrangler login && npx wrangler deploy`
+   This prints the https://portfolio-chat-worker.<subdomain>.workers.dev URL.
 
-## Wire the frontend
-Build the site with the Worker URL:
+## Wire the frontend (from the repo root)
+Build the site with the Worker URL, then commit/push `dist` per the usual GitHub Pages flow:
 `VITE_CHAT_API_URL="https://portfolio-chat-worker.<subdomain>.workers.dev" npm run build`
-then commit/push `dist` per the usual GitHub Pages flow.
 
-## After any résumé change
-Re-run step 3 + `npx wrangler deploy` so the assistant reflects the new résumé.
+## After any résumé change (from the repo root)
+1. `node scripts/gen-resume-context.mjs`
+2. `cd worker && npx wrangler deploy`
+
+Then rebuild + redeploy the frontend as above so the assistant reflects the new résumé.
