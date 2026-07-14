@@ -33,37 +33,46 @@ export function useChat() {
       const decoder = new TextDecoder();
       let buffer = "";
 
+      const handleLine = (line) => {
+        const trimmedLine = line.trim();
+        if (!trimmedLine.startsWith("data:")) return;
+        const payload = trimmedLine.slice(5).trim();
+        if (payload === "[DONE]") return;
+        try {
+          const token = JSON.parse(payload).response ?? "";
+          if (token) {
+            setMessages((prev) => {
+              const next = [...prev];
+              next[next.length - 1] = {
+                role: "assistant",
+                content: next[next.length - 1].content + token,
+              };
+              return next;
+            });
+          }
+        } catch {
+          /* ignore keep-alive / non-JSON lines */
+        }
+      };
+
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
         buffer += decoder.decode(value, { stream: true });
         const parts = buffer.split("\n");
         buffer = parts.pop() ?? "";
-        for (const line of parts) {
-          const trimmedLine = line.trim();
-          if (!trimmedLine.startsWith("data:")) continue;
-          const payload = trimmedLine.slice(5).trim();
-          if (payload === "[DONE]") continue;
-          try {
-            const token = JSON.parse(payload).response ?? "";
-            if (token) {
-              setMessages((prev) => {
-                const next = [...prev];
-                next[next.length - 1] = {
-                  role: "assistant",
-                  content: next[next.length - 1].content + token,
-                };
-                return next;
-              });
-            }
-          } catch {
-            /* ignore keep-alive / non-JSON lines */
-          }
-        }
+        for (const line of parts) handleLine(line);
       }
+      if (buffer.trim()) handleLine(buffer);
     } catch {
       setError("Chat is momentarily unavailable — reach Suneel at suneeluhcl@gmail.com.");
-      setMessages((prev) => prev.slice(0, -1)); // drop the empty assistant bubble
+      setMessages((prev) => {
+        const last = prev[prev.length - 1];
+        if (last && last.role === "assistant" && last.content === "") {
+          return prev.slice(0, -1);
+        }
+        return prev;
+      });
     } finally {
       setBusy(false);
     }

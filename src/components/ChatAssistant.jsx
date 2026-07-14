@@ -15,11 +15,13 @@ export default function ChatAssistant() {
   const endRef = useRef(null);
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    endRef.current?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
   }, [messages]);
 
   const submit = (e) => {
     e.preventDefault();
+    if (busy) return;
     send(input);
     setInput("");
   };
@@ -83,6 +85,7 @@ export default function ChatAssistant() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask about Suneel's experience…"
+              disabled={busy}
               className="flex-1 rounded-full border border-slate-300 bg-transparent px-3 py-2 text-sm outline-none focus:border-cyan-500 dark:border-slate-600"
             />
             <button
