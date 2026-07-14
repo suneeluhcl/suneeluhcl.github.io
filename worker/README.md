@@ -1,7 +1,7 @@
 # Portfolio Chat Worker
 
 Free Cloudflare Worker backing the "Ask my résumé" widget. Runs Workers AI
-(`@cf/meta/llama-3.1-8b-instruct`) — no paid plan, no API key in the browser.
+(`@cf/meta/llama-3.1-8b-instruct-fp8`) — no paid plan, no API key in the browser.
 
 ## One-time setup (from the repo root)
 1. Regenerate the résumé context:

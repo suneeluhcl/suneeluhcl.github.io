@@ -2,7 +2,7 @@ import { buildSystemPrompt } from "./lib/systemPrompt.js";
 import { isAllowedOrigin, validateMessages, ALLOWED_ORIGINS } from "./lib/validation.js";
 import { RESUME_CONTEXT } from "./generated/resumeContext.js";
 
-const MODEL = "@cf/meta/llama-3.1-8b-instruct";
+const MODEL = "@cf/meta/llama-3.1-8b-instruct-fp8";
 
 function corsHeaders(origin) {
   const allow = isAllowedOrigin(origin) ? origin : ALLOWED_ORIGINS[0];
@@ -54,7 +54,8 @@ export default {
       return new Response(stream, {
         headers: { ...cors, "content-type": "text/event-stream" },
       });
-    } catch {
+    } catch (err) {
+      console.error("AI.run failed:", err?.stack || err?.message || String(err));
       return json({ error: "ai_unavailable" }, 502, cors);
     }
   },
