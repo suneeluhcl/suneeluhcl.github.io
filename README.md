@@ -36,6 +36,10 @@ and it will be served automatically.
 All resume content (hero, about, skills, experience, education) lives in one file:
 `src/data.js`. Edit it and the UI updates — no component changes needed.
 
+## AI Chat Backend
+
+The "Ask my résumé" widget is powered by a Cloudflare Worker. See [worker/README.md](worker/README.md) for deployment and configuration steps.
+
 ## Structure
 
 ```
