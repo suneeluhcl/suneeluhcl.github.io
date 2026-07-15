@@ -197,6 +197,83 @@ export const experience = [
   },
 ];
 
+// PROJECTS — Selected work. Enterprise projects, so no public links; internal
+// system/vendor names are deliberately kept generic. Shape per entry:
+//   title, org, tagline, stack[], highlights[], links[{label,url,icon}] (optional)
+export const projects = [
+  {
+    title: "Payments Fulfillment Platform",
+    org: "Capital One",
+    tagline:
+      "The engine that fulfills every card payment at a top-5 US bank — millions of transactions a day across ACH, debit, check, balance transfers, and cross-border EFT.",
+    stack: ["Java 17/21", "Go", "Python", "Spring Boot", "AWS", "Spark / EMR", "Kafka", "GenAI"],
+    highlights: [
+      "Own the public payment-fulfillment API and core services (Spring Boot on ECS Fargate) plus a next-generation real-time money-movement platform in Go — event-driven and active/active across two AWS regions.",
+      "Built the vendor-file ingestion and batch-posting pipeline on AWS Step Functions + EMR Spark (40+ file formats) with automated reconciliation to the card processor.",
+      "Shipped GenAI ops tooling — an LLM inference service that guides end-of-day payment decisions — and embedded PCI DSS / NIST 800-53 security (OAuth2, mutual TLS, PGP, KMS) across the SDLC.",
+    ],
+  },
+  {
+    title: "Real-Time Agent Transfer Payments",
+    org: "Capital One",
+    tagline:
+      "A PCI-compliant servicing channel that lets support agents move money card-to-card in real time.",
+    stack: ["Node.js", "Fastify", "GraphQL", "REST / SOAP", "AWS", "PCI DSS"],
+    highlights: [
+      "Built a Node.js / Fastify microservice inside the Cardholder Data Environment that orchestrates tokenized card lookups, secure detokenization, and real-time transfer posting.",
+      "Enforced PCI DSS controls end-to-end — proof-of-possession tokens, field-level encryption, and structured security logging on every request.",
+    ],
+  },
+  {
+    title: "Campaign Processing Platform",
+    org: "Fidelity Investments",
+    tagline:
+      "A high-throughput campaign-processing platform for a top asset manager, handling millions of user events.",
+    stack: ["Java 8/11", "Spring Boot", "React", "Angular", "AWS ECS / Lambda", "DynamoDB", "Splunk"],
+    highlights: [
+      "Led delivery of stateless Spring Boot microservices secured with OAuth2, JWT, and AWS IAM role-based access.",
+      "Decomposed monoliths into independent services for scalability and fault isolation, with React and Angular front ends.",
+      "Introduced threat modeling into the SDLC and cut incident response time 30% with Splunk / CloudWatch observability.",
+    ],
+  },
+  {
+    title: "Formulary Alternatives & Derivatives",
+    org: "CVS Health",
+    tagline:
+      "Pharmacy-benefits tooling that surfaces lower-cost formulary alternatives and drug derivatives for members and providers.",
+    stack: ["Java 8", "Spring Boot", "Angular 6", "GCP (GKE, Pub/Sub, BigQuery)", "Cassandra", "MongoDB"],
+    highlights: [
+      "Built Angular 6 single-page apps and containerized Spring Boot microservices deployed to Google Kubernetes Engine with Cloud Build CI/CD.",
+      "Wired event-driven integrations with Cloud Pub/Sub and Cloud Functions; modeled data across Cloud SQL, Cassandra, and MongoDB.",
+      "Fed analytics datasets into BigQuery for reporting on formulary and pricing trends.",
+    ],
+  },
+  {
+    title: "ORS Nasco Website Redesign",
+    org: "Essendant",
+    tagline:
+      "A complete ground-up redesign of the ORS Nasco wholesale-distribution website.",
+    stack: ["Java 8", "Spring Boot", "Angular 2", "Node.js", "Docker", "AWS", "GCP (GKE)"],
+    highlights: [
+      "Rebuilt the front end in Angular 2 + Node.js with a component-based architecture and responsive layouts.",
+      "Integrated a business rules engine (ILOG JRules) for rule-driven decisioning.",
+      "Deployed Dockerized microservices across AWS and Google Cloud (GKE + Compute Engine) with Pub/Sub messaging and Stackdriver monitoring.",
+    ],
+  },
+  {
+    title: "Florist Website Platform",
+    org: "Teleflora",
+    tagline:
+      "Designed and built a platform generating thousands of personalized websites and templates for florists nationwide.",
+    stack: ["Java 7/8", "Spring 3.0", "Hibernate", "JSF 2.0", "PrimeFaces", "SOAP / REST", "WebSphere"],
+    highlights: [
+      "Architected the system with Spring (IOC/AOP) and Hibernate using UML and GoF design patterns.",
+      "Delivered SOAP and REST services (JAX-WS, JAX-RS, Apache CXF) powering template personalization at scale.",
+      "Built the JSF 2.0 + PrimeFaces UI, deployed on IBM WebSphere.",
+    ],
+  },
+];
+
 export const stats = [
   { value: 10, suffix: "+", label: "Years of Experience" },
   { value: 7, suffix: "", label: "Enterprise Engagements" },

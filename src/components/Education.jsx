@@ -8,7 +8,7 @@ const icons = { GraduationCap, BookOpen };
 export default function Education() {
   return (
     <section id="education" className="max-w-6xl mx-auto px-5 md:px-8 py-24">
-      <SectionHeading index="04" label="education" title="Education" />
+      <SectionHeading index="05" label="education" title="Education" />
 
       <div className="grid gap-5 md:grid-cols-2">
         {education.map((ed, i) => {

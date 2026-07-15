@@ -23,7 +23,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="max-w-6xl mx-auto px-5 md:px-8 py-24">
-      <SectionHeading index="06" label="contact" title="Get In Touch" />
+      <SectionHeading index="07" label="contact" title="Get In Touch" />
 
       <div className="grid gap-10 lg:grid-cols-2">
         <Reveal>

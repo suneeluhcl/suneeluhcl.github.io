@@ -8,7 +8,7 @@ const icons = { Cloud, BrainCircuit };
 export default function Certifications() {
   return (
     <section id="certifications" className="max-w-6xl mx-auto px-5 md:px-8 py-24">
-      <SectionHeading index="05" label="certifications" title="Certifications" />
+      <SectionHeading index="06" label="certifications" title="Certifications" />
 
       <div className="grid gap-5 md:grid-cols-2">
         {certifications.map((cert, i) => {
