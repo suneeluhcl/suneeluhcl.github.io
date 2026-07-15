@@ -2,9 +2,12 @@
 name = "portfolio-chat-worker"
 main = "src/index.js"
 compatibility_date = "2025-07-01"
+# nodejs_compat lets the Anthropic SDK run on the Workers runtime.
+compatibility_flags = ["nodejs_compat"]
 
-[ai]
-binding = "AI"
+# The Claude API key is a secret, NOT stored here. Set it once with:
+#   cd worker && npx wrangler secret put ANTHROPIC_API_KEY
+# (create the key at https://console.anthropic.com/settings/keys)
 
 [[ratelimits]]
 name = "RATE_LIMITER"
