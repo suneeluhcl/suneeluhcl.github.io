@@ -9,3 +9,6 @@ if (import.meta.env.PROD && !configuredUrl) {
 }
 
 export const CHAT_API_URL = configuredUrl ?? "http://localhost:8787";
+
+// Same Worker, dedicated route (see worker/src/index.js).
+export const CONTACT_API_URL = `${CHAT_API_URL.replace(/\/+$/, "")}/contact`;

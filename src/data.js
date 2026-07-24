@@ -5,7 +5,21 @@ export const profile = {
     "10+ years designing secure, scalable, enterprise-grade systems with Java, Spring Boot, AWS, and modern front ends — now building payment platforms that move millions of transactions a day, and the GenAI tooling that keeps them running.",
   phone: "281-786-5856",
   email: "suneeluhcl@gmail.com",
+  // Social profiles. Every link renders ONLY when its value is non-empty, so an
+  // unfilled entry is simply hidden rather than shipping a dead link.
+  linkedin: "https://www.linkedin.com/in/suneel-kumar-bikkasani-42a1b413b",
+  github: "",
   typingWords: ["Java", "Spring Boot", "Go", "Python", "React", "Angular", "AWS", "GCP", "Kubernetes", "Microservices", "GenAI", "AI Agents"],
+};
+
+// Logistics recruiters screen on before they reach out. Keeping these on the page
+// prevents both the wasted intro call and the silent pass. Set any value to "" to
+// hide that single item; the whole strip hides when all four are empty.
+export const availability = {
+  location: "Houston, TX",
+  arrangement: "Remote only",
+  workAuth: "H-1B — transfer required",
+  status: "Available immediately",
 };
 
 export const about = [

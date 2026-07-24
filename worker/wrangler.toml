@@ -5,9 +5,18 @@ compatibility_date = "2025-07-01"
 # nodejs_compat lets the Anthropic SDK run on the Workers runtime.
 compatibility_flags = ["nodejs_compat"]
 
-# The Claude API key is a secret, NOT stored here. Set it once with:
+# API keys are secrets, NOT stored here. Set them once with:
 #   cd worker && npx wrangler secret put ANTHROPIC_API_KEY
-# (create the key at https://console.anthropic.com/settings/keys)
+#   (create the key at https://console.anthropic.com/settings/keys)
+#   cd worker && npx wrangler secret put RESEND_API_KEY
+#   (create the key at https://resend.com/api-keys — see worker/README.md for the
+#    domain-verification step the contact form needs)
+
+[vars]
+# Where contact-form submissions are delivered.
+CONTACT_TO = "suneeluhcl@gmail.com"
+# Must be an address on a domain verified in Resend, otherwise sending fails.
+CONTACT_FROM = "Portfolio <portfolio@suneelkumarbikkasani.com>"
 
 [[ratelimits]]
 name = "RATE_LIMITER"

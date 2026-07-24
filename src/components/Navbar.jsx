@@ -12,9 +12,17 @@ const links = [
 ];
 
 export default function Navbar() {
-  const [dark, setDark] = useState(() => document.documentElement.classList.contains("dark"));
+  // Dark is the site default, so that is what the prerendered HTML contains.
+  // Reading document.documentElement during render would crash the static build
+  // and desync hydration, so the saved theme (applied by the inline script in
+  // index.html before paint) is picked up on mount instead.
+  const [dark, setDark] = useState(true);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    setDark(document.documentElement.classList.contains("dark"));
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
