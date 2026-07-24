@@ -1,5 +1,7 @@
 import { Phone, Mail, ArrowDown, TerminalSquare } from "lucide-react";
 import Typewriter from "./Typewriter.jsx";
+import SocialLinks from "./SocialLinks.jsx";
+import Availability from "./Availability.jsx";
 import { profile } from "../data.js";
 import portrait from "../assets/suneel.webp";
 
@@ -56,9 +58,12 @@ export default function Hero() {
             <a href={`mailto:${profile.email}`} className="flex items-center gap-2 hover:text-accent transition-colors">
               <Mail size={15} aria-hidden="true" /> {profile.email}
             </a>
+            <SocialLinks variant="inline" />
           </div>
 
-          <div className="hero-rise mt-10 flex flex-wrap gap-4" style={rise(6)}>
+          <Availability className="hero-rise mt-6" style={rise(6)} />
+
+          <div className="hero-rise mt-10 flex flex-wrap gap-4" style={rise(7)}>
             <a
               href="#experience"
               className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg font-mono text-sm font-semibold
@@ -91,7 +96,7 @@ export default function Hero() {
                 width="640"
                 height="640"
                 loading="eager"
-                fetchpriority="high"
+                fetchPriority="high"
                 decoding="async"
                 className="rounded-full w-full aspect-square object-cover bg-gradient-to-b from-card-soft to-accent/15"
               />
