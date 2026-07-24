@@ -1,6 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { buildSystemPrompt } from "./lib/systemPrompt.js";
 import { isAllowedOrigin, validateMessages, ALLOWED_ORIGINS } from "./lib/validation.js";
+import { validateContact, sendViaResend } from "./lib/contact.js";
 import { RESUME_CONTEXT } from "./generated/resumeContext.js";
 
 // Claude model powering the "Ask my résumé" assistant.
@@ -53,6 +54,31 @@ function toResponseStream(anthropicStream) {
   });
 }
 
+// POST /contact — portfolio contact form. Delivered by email so a message is never
+// silently lost, which is exactly what the previous mailto: form did on machines
+// with no native mail client configured.
+async function handleContact(body, env, cors) {
+  const v = validateContact(body);
+  if (!v.ok) return json({ error: v.error }, 400, cors);
+
+  // Honeypot tripped: answer exactly like the success path and drop the message.
+  if (v.spam) return json({ ok: true }, 200, cors);
+
+  if (!env.RESEND_API_KEY || !env.CONTACT_TO || !env.CONTACT_FROM) {
+    console.error("contact form is not configured (RESEND_API_KEY / CONTACT_TO / CONTACT_FROM)");
+    return json({ error: "contact_unavailable" }, 503, cors);
+  }
+
+  try {
+    // env.SEND_EMAIL lets tests inject a fake sender.
+    await (env.SEND_EMAIL ?? sendViaResend)(env, v.data);
+    return json({ ok: true }, 200, cors);
+  } catch (err) {
+    console.error("contact delivery failed:", err?.stack || err?.message || String(err));
+    return json({ error: "contact_unavailable" }, 502, cors);
+  }
+}
+
 export default {
   async fetch(request, env) {
     const origin = request.headers.get("Origin");
@@ -71,6 +97,12 @@ export default {
       body = await request.json();
     } catch {
       return json({ error: "bad_json" }, 400, cors);
+    }
+
+    // The chat client posts to the worker root, so anything that is not an
+    // explicit route stays on the existing chat path.
+    if (new URL(request.url).pathname.replace(/\/+$/, "") === "/contact") {
+      return handleContact(body, env, cors);
     }
 
     const v = validateMessages(body?.messages);

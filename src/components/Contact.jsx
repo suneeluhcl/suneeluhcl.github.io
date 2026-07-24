@@ -1,24 +1,50 @@
 import { useState } from "react";
-import { Phone, Mail, Send, FileDown } from "lucide-react";
+import { Phone, Mail, Send, FileDown, CheckCircle2, AlertTriangle } from "lucide-react";
 import Reveal from "./Reveal.jsx";
 import SectionHeading from "./SectionHeading.jsx";
+import SocialLinks from "./SocialLinks.jsx";
 import { profile } from "../data.js";
+import { CONTACT_API_URL } from "../config.js";
 
 const inputClasses =
   "w-full rounded-lg border border-line bg-card-soft px-4 py-2.5 text-sm text-ink placeholder:text-mut/60 " +
-  "focus:outline-none focus:border-accent/70 focus:shadow-[0_0_12px_var(--c-glow)] transition";
+  "focus:outline-none focus:border-accent/70 focus:shadow-[0_0_12px_var(--c-glow)] transition " +
+  "disabled:opacity-60 disabled:cursor-not-allowed";
+
+const EMPTY = { name: "", email: "", message: "", website: "" };
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState(EMPTY);
+  // idle | sending | sent | error
+  const [status, setStatus] = useState("idle");
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  // No backend: compose the message into a mailto link.
-  const handleSubmit = (e) => {
+  // Prefilled mailto used only as an escape hatch when delivery fails, so a typed
+  // message is never lost with nowhere to go.
+  const mailtoFallback =
+    `mailto:${profile.email}` +
+    `?subject=${encodeURIComponent(`Portfolio contact from ${form.name || "the website"}`)}` +
+    `&body=${encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`)}`;
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Portfolio contact from ${form.name}`);
-    const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+    if (status === "sending") return;
+    setStatus("sending");
+
+    try {
+      const res = await fetch(CONTACT_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error(`status ${res.status}`);
+
+      setStatus("sent");
+      setForm(EMPTY);
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -53,6 +79,9 @@ export default function Contact() {
                 {profile.email}
               </a>
             </div>
+
+            <SocialLinks variant="icon" className="mt-6" />
+
             <a
               href="/resume.pdf"
               download="Suneel-Kumar-Resume.pdf"
@@ -76,6 +105,7 @@ export default function Contact() {
                 name="name"
                 type="text"
                 required
+                disabled={status === "sending"}
                 value={form.name}
                 onChange={handleChange}
                 placeholder="Jane Recruiter"
@@ -91,6 +121,7 @@ export default function Contact() {
                 name="email"
                 type="email"
                 required
+                disabled={status === "sending"}
                 value={form.email}
                 onChange={handleChange}
                 placeholder="jane@company.com"
@@ -105,6 +136,7 @@ export default function Contact() {
                 id="message"
                 name="message"
                 required
+                disabled={status === "sending"}
                 rows={5}
                 value={form.message}
                 onChange={handleChange}
@@ -112,14 +144,53 @@ export default function Contact() {
                 className={`${inputClasses} resize-y`}
               />
             </div>
+
+            {/* Honeypot: invisible to people, reliably filled by bots. Kept out of
+                the tab order and the accessibility tree. */}
+            <div aria-hidden="true" style={{ position: "absolute", left: "-9999px" }}>
+              <label htmlFor="website">Leave this field empty</label>
+              <input
+                id="website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={form.website}
+                onChange={handleChange}
+              />
+            </div>
+
             <button
               type="submit"
+              disabled={status === "sending"}
               className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-mono text-sm font-semibold
-                         bg-accent text-[#06121a] hover:shadow-[0_0_28px_var(--c-glow)] transition-shadow"
+                         bg-accent text-[#06121a] hover:shadow-[0_0_28px_var(--c-glow)] transition-shadow
+                         disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <Send size={16} aria-hidden="true" />
-              Send Message
+              {status === "sending" ? "Sending…" : "Send Message"}
             </button>
+
+            <p role="status" aria-live="polite" className="font-mono text-xs">
+              {status === "sent" && (
+                <span className="flex items-center gap-2 text-accent">
+                  <CheckCircle2 size={14} aria-hidden="true" />
+                  Thanks — your message is on its way. I'll reply to the address you gave.
+                </span>
+              )}
+              {status === "error" && (
+                <span className="flex items-start gap-2 text-amber-500">
+                  <AlertTriangle size={14} className="mt-0.5 shrink-0" aria-hidden="true" />
+                  <span>
+                    That didn't go through. Your message is still in the box —{" "}
+                    <a href={mailtoFallback} className="underline hover:text-accent">
+                      send it by email instead
+                    </a>{" "}
+                    or write to {profile.email}.
+                  </span>
+                </span>
+              )}
+            </p>
           </form>
         </Reveal>
       </div>
