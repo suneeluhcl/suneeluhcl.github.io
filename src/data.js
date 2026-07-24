@@ -16,7 +16,7 @@ export const profile = {
 // prevents both the wasted intro call and the silent pass. Set any value to "" to
 // hide that single item; the whole strip hides when all four are empty.
 export const availability = {
-  location: "Houston, TX",
+  location: "Dallas, TX",
   arrangement: "Remote only",
   workAuth: "H-1B — transfer required",
   status: "Available immediately",

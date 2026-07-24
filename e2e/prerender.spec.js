@@ -8,6 +8,7 @@ import { test, expect } from "@playwright/test";
 test("résumé content is readable without executing JavaScript", async ({ request }) => {
   // A raw HTTP fetch is exactly what an ATS scraper or a non-JS AI crawler sees.
   const html = await (await request.get("/")).text();
+  const { availability } = await import("../src/data.js");
 
   for (const needle of [
     "Capital One",
@@ -15,8 +16,9 @@ test("résumé content is readable without executing JavaScript", async ({ reque
     "Senior Java Full Stack Developer",
     "Fidelity Investments",
     "AWS Certified Solutions Architect",
-    "Houston, TX",
-    "Available immediately",
+    // Read from data.js rather than hardcoded, so editing the logistics strip
+    // updates the assertion instead of breaking it.
+    ...Object.values(availability).filter(Boolean),
   ]) {
     expect(html, `static HTML should contain "${needle}"`).toContain(needle);
   }
