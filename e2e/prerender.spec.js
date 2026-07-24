@@ -25,6 +25,15 @@ test("résumé content is readable without executing JavaScript", async ({ reque
   expect(html.length).toBeGreaterThan(50_000);
 });
 
+test("configured social profiles reach crawlers in the static HTML", async ({ request }) => {
+  const html = await (await request.get("/")).text();
+  const { profile } = await import("../src/data.js");
+
+  for (const url of [profile.linkedin, profile.github].filter(Boolean)) {
+    expect(html, `static HTML should link to ${url}`).toContain(url);
+  }
+});
+
 test("structured data is valid JSON and describes a Person", async ({ request }) => {
   const html = await (await request.get("/")).text();
   const match = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
@@ -34,6 +43,12 @@ test("structured data is valid JSON and describes a Person", async ({ request })
   expect(data["@type"]).toBe("Person");
   expect(data.jobTitle).toBeTruthy();
   expect(Array.isArray(data.hasCredential)).toBe(true);
+
+  // sameAs is what tells Google/AI crawlers this page and the LinkedIn profile are
+  // the same person, so it must carry every configured profile — and nothing blank.
+  const { profile } = await import("../src/data.js");
+  const configured = [profile.linkedin, profile.github].filter(Boolean);
+  expect(data.sameAs ?? []).toEqual(configured);
 });
 
 test("hydrates without React errors or mismatches", async ({ page }) => {

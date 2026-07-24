@@ -7,7 +7,7 @@ export const profile = {
   email: "suneeluhcl@gmail.com",
   // Social profiles. Every link renders ONLY when its value is non-empty, so an
   // unfilled entry is simply hidden rather than shipping a dead link.
-  linkedin: "",
+  linkedin: "https://www.linkedin.com/in/suneel-kumar-bikkasani-42a1b413b",
   github: "",
   typingWords: ["Java", "Spring Boot", "Go", "Python", "React", "Angular", "AWS", "GCP", "Kubernetes", "Microservices", "GenAI", "AI Agents"],
 };
