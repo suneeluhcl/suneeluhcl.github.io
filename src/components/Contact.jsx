@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Phone, Mail, Send, FileDown, CheckCircle2, AlertTriangle } from "lucide-react";
+import { Phone, Mail, Send, FileDown, FileText, CheckCircle2, AlertTriangle } from "lucide-react";
 import Reveal from "./Reveal.jsx";
 import SectionHeading from "./SectionHeading.jsx";
 import SocialLinks from "./SocialLinks.jsx";
@@ -82,15 +82,27 @@ export default function Contact() {
 
             <SocialLinks variant="icon" className="mt-6" />
 
-            <a
-              href="/resume.pdf"
-              download="Suneel-Kumar-Resume.pdf"
-              className="mt-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-mono text-sm font-semibold
-                         border border-accent/50 text-accent hover:bg-accent/10 hover:shadow-[0_0_20px_var(--c-glow)] transition"
-            >
-              <FileDown size={16} aria-hidden="true" />
-              Download Resume
-            </a>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {/* The web résumé is the linkable, indexable version; the PDF is what
+                  gets attached to applications. Both point at the same source. */}
+              <a
+                href="/resume/"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-mono text-sm font-semibold
+                           border border-accent/50 text-accent hover:bg-accent/10 hover:shadow-[0_0_20px_var(--c-glow)] transition"
+              >
+                <FileText size={16} aria-hidden="true" />
+                View Résumé
+              </a>
+              <a
+                href="/resume.pdf"
+                download="Suneel-Kumar-Resume.pdf"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-mono text-sm font-semibold
+                           border border-line text-mut hover:text-accent hover:border-accent/50 transition"
+              >
+                <FileDown size={16} aria-hidden="true" />
+                Download PDF
+              </a>
+            </div>
           </div>
         </Reveal>
 

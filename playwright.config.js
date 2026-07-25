@@ -21,12 +21,12 @@ export default defineConfig({
   projects: [
     {
       name: "dev",
-      testIgnore: /prerender\.spec\.js/,
+      testIgnore: /(prerender|resume-page)\.spec\.js/,
       use: { baseURL: "http://localhost:5173" },
     },
     {
       name: "built",
-      testMatch: /prerender\.spec\.js/,
+      testMatch: /(prerender|resume-page)\.spec\.js/,
       use: { baseURL: "http://localhost:4173" },
     },
   ],
