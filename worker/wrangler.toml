@@ -25,3 +25,19 @@ namespace_id = "2001"
   [ratelimits.simple]
     limit = 20
     period = 60
+
+# Chat question log — what visitors asked and what the assistant answered.
+# Stores no IP, user agent, or identifier. See schema.sql.
+#
+# Disabled until the database exists, because wrangler rejects a blank
+# database_id at deploy time. To turn it on (from worker/):
+#   npx wrangler d1 create portfolio-chat-log
+#   npx wrangler d1 execute portfolio-chat-log --remote --file=./schema.sql
+# then uncomment the block below, paste in the printed database_id, and redeploy.
+# While it stays commented out the binding is simply absent and logging no-ops —
+# the chat itself is unaffected either way.
+#
+# [[d1_databases]]
+# binding = "CHAT_LOG"
+# database_name = "portfolio-chat-log"
+# database_id = "<paste the id printed by `wrangler d1 create`>"

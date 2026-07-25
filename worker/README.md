@@ -7,6 +7,8 @@ Cloudflare Worker backing two things on the site:
 | `/`        | "Ask my résumé" chat — Anthropic API (**Claude Haiku 4.5**, see `MODEL` in `src/index.js`), streamed back as SSE |
 | `/contact` | Contact-form delivery via [Resend](https://resend.com)                |
 
+Chat exchanges are optionally logged to D1 (see *Chat question log* below).
+
 Both run server-side so no API key touches the browser, and both share the same
 origin allowlist and 20 req/min per-IP rate limit.
 
@@ -62,6 +64,39 @@ Then rebuild + redeploy the frontend as above so the assistant reflects the new 
 Haiku 4.5 costs fractions of a cent per chat and is rate-limited to 20 requests/min
 per IP. To raise answer quality, change `MODEL` in `src/index.js` to `claude-sonnet-5`
 or `claude-opus-4-8` and redeploy.
+
+## Chat question log (optional)
+Records what visitors ask the assistant and what it answered — the fastest way to
+learn what recruiters actually want to know, and to catch the assistant answering
+badly about Suneel.
+
+**Privacy:** no IP, user agent, or session identifier is stored. Just timestamp,
+question, answer, and any error. See `schema.sql`.
+
+Off by default — the `[[d1_databases]]` block in `wrangler.toml` is commented out
+because wrangler rejects a blank `database_id`. To turn it on:
+```
+cd worker
+npx wrangler d1 create portfolio-chat-log          # prints a database_id
+npx wrangler d1 execute portfolio-chat-log --remote --file=./schema.sql
+# uncomment the [[d1_databases]] block in wrangler.toml, paste in the id
+npx wrangler deploy
+```
+
+Read it back:
+```
+# the 20 most recent questions
+npx wrangler d1 execute portfolio-chat-log --remote \
+  --command "SELECT asked_at, question FROM chat_logs ORDER BY id DESC LIMIT 20"
+
+# anything that failed
+npx wrangler d1 execute portfolio-chat-log --remote \
+  --command "SELECT asked_at, question, error FROM chat_logs WHERE error IS NOT NULL"
+```
+
+Logging is best-effort by design: a missing binding is a no-op and a failed write is
+swallowed, so it can never take the chat down. The write runs via `ctx.waitUntil`,
+so it never delays a response.
 
 ## Tests
 `npm test` — the Anthropic client is injected via `env.ANTHROPIC` and the mail sender

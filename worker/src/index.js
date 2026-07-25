@@ -2,6 +2,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { buildSystemPrompt } from "./lib/systemPrompt.js";
 import { isAllowedOrigin, validateMessages, ALLOWED_ORIGINS } from "./lib/validation.js";
 import { validateContact, sendViaResend } from "./lib/contact.js";
+import { logChat, runInBackground } from "./lib/chatLog.js";
 import { RESUME_CONTEXT } from "./generated/resumeContext.js";
 
 // Claude model powering the "Ask my résumé" assistant.
@@ -30,25 +31,33 @@ function json(obj, status, headers) {
 // Transform Anthropic's SSE event stream into the `data: {"response": "<token>"}`
 // shape the frontend (src/hooks/useChat.js) already parses, so the client needs
 // no changes when the backend model swaps.
-function toResponseStream(anthropicStream) {
+//
+// `onComplete(answer, error)` fires once the stream finishes either way, so the
+// caller can record the full answer without buffering it out of the response path.
+function toResponseStream(anthropicStream, onComplete) {
   const encoder = new TextEncoder();
   return new ReadableStream({
     async start(controller) {
+      let answer = "";
+      let failure = null;
       try {
         for await (const event of anthropicStream) {
           if (event.type === "content_block_delta" && event.delta?.type === "text_delta") {
             const token = event.delta.text;
             if (token) {
+              answer += token;
               controller.enqueue(encoder.encode(`data: ${JSON.stringify({ response: token })}\n\n`));
             }
           }
         }
         controller.enqueue(encoder.encode("data: [DONE]\n\n"));
       } catch (err) {
-        console.error("stream failed:", err?.stack || err?.message || String(err));
+        failure = err?.message || String(err);
+        console.error("stream failed:", err?.stack || failure);
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error: "stream_failed" })}\n\n`));
       } finally {
         controller.close();
+        onComplete?.(answer, failure);
       }
     },
   });
@@ -80,7 +89,7 @@ async function handleContact(body, env, cors) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const origin = request.headers.get("Origin");
     const cors = corsHeaders(origin);
 
@@ -111,6 +120,10 @@ export default {
     // env.ANTHROPIC lets tests inject a fake client; production builds one from the secret.
     const client = env.ANTHROPIC ?? new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
 
+    // The last user turn is the question being asked right now; earlier turns are
+    // history already recorded by their own request.
+    const question = [...v.messages].reverse().find((m) => m.role === "user")?.content ?? "";
+
     try {
       const anthropicStream = await client.messages.create({
         model: MODEL,
@@ -119,11 +132,17 @@ export default {
         messages: v.messages,
         stream: true,
       });
-      return new Response(toResponseStream(anthropicStream), {
+
+      const stream = toResponseStream(anthropicStream, (answer, error) =>
+        runInBackground(ctx, logChat(env, { question, answer, error })),
+      );
+      return new Response(stream, {
         headers: { ...cors, "content-type": "text/event-stream" },
       });
     } catch (err) {
-      console.error("Anthropic request failed:", err?.stack || err?.message || String(err));
+      const message = err?.message || String(err);
+      console.error("Anthropic request failed:", err?.stack || message);
+      runInBackground(ctx, logChat(env, { question, answer: null, error: message }));
       return json({ error: "ai_unavailable" }, 502, cors);
     }
   },
