@@ -13,6 +13,10 @@ compatibility_flags = ["nodejs_compat"]
 #    domain-verification step the contact form needs)
 
 [vars]
+# Keep Anthropic as the live default. Set this to "openai" and store OPENAI_API_KEY
+# as a Wrangler secret to switch providers without changing the frontend.
+AI_PROVIDER = "anthropic"
+OPENAI_MODEL = "gpt-5.6-luna"
 # Where contact-form submissions are delivered.
 CONTACT_TO = "suneeluhcl@gmail.com"
 # Must be an address on a domain verified in Resend, otherwise sending fails.

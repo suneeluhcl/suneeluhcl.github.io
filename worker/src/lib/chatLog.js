@@ -1,6 +1,7 @@
 // Answers can be long; cap what is stored so one runaway response cannot bloat
 // the table. The question is already capped at 2000 by validateMessages.
 const MAX_ANSWER = 8000;
+const RETENTION_DAYS = 90;
 
 /**
  * Records what a visitor asked and what the assistant replied.
@@ -26,6 +27,9 @@ export async function logChat(env, { question, answer, error }) {
         error ?? null,
       )
       .run();
+    await env.CHAT_LOG.prepare(
+      `DELETE FROM chat_logs WHERE datetime(asked_at) < datetime('now', '-${RETENTION_DAYS} days')`,
+    ).run();
   } catch (err) {
     console.error("chat log write failed:", err?.stack || err?.message || String(err));
   }

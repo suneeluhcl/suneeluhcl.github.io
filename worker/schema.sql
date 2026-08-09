@@ -4,7 +4,8 @@
 --   npx wrangler d1 execute portfolio-chat-log --remote --file=./schema.sql
 --
 -- Privacy: this deliberately stores no IP address, user agent, or any other
--- identifier. It records what was asked and what the assistant answered — enough
+-- identifier. It records what was asked and what the assistant answered for at most
+-- 90 days — enough
 -- to learn what recruiters want to know and to catch a bad answer, and nothing
 -- that identifies who asked.
 

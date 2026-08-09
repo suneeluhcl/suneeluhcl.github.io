@@ -16,6 +16,9 @@ function fakeD1(onRun = async () => {}) {
   return {
     rows,
     prepare(sql) {
+      if (sql.startsWith("DELETE")) {
+        return { async run() { await onRun(); } };
+      }
       return {
         bind(...params) {
           return {
@@ -76,6 +79,21 @@ describe("logChat", () => {
     expect(answer).toBe("Yes.");
     expect(error).toBeNull();
     expect(() => new Date(askedAt).toISOString()).not.toThrow();
+  });
+
+  it("removes chat records older than 90 days after each write", async () => {
+    const statements = [];
+    const db = {
+      prepare(sql) {
+        statements.push(sql);
+        return {
+          bind() { return { async run() {} }; },
+          async run() {},
+        };
+      },
+    };
+    await logChat({ CHAT_LOG: db }, { question: "q", answer: "a" });
+    expect(statements[1]).toContain("-90 days");
   });
 
   it("truncates a runaway answer", async () => {

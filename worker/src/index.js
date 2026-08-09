@@ -1,14 +1,10 @@
-import Anthropic from "@anthropic-ai/sdk";
 import { buildSystemPrompt } from "./lib/systemPrompt.js";
 import { isAllowedOrigin, validateMessages, ALLOWED_ORIGINS } from "./lib/validation.js";
 import { validateContact, sendViaResend } from "./lib/contact.js";
 import { logChat, runInBackground } from "./lib/chatLog.js";
+import { createModelStream } from "./lib/modelProvider.js";
 import { RESUME_CONTEXT } from "./generated/resumeContext.js";
 
-// Claude model powering the "Ask my résumé" assistant.
-// Haiku 4.5 is fast + cheap (fractions of a cent per chat) and plenty capable
-// for résumé Q&A. To upgrade quality, swap for "claude-sonnet-5" or "claude-opus-4-8".
-const MODEL = "claude-haiku-4-5";
 const MAX_TOKENS = 512;
 
 function corsHeaders(origin) {
@@ -34,20 +30,17 @@ function json(obj, status, headers) {
 //
 // `onComplete(answer, error)` fires once the stream finishes either way, so the
 // caller can record the full answer without buffering it out of the response path.
-function toResponseStream(anthropicStream, onComplete) {
+function toResponseStream(modelStream, onComplete) {
   const encoder = new TextEncoder();
   return new ReadableStream({
     async start(controller) {
       let answer = "";
       let failure = null;
       try {
-        for await (const event of anthropicStream) {
-          if (event.type === "content_block_delta" && event.delta?.type === "text_delta") {
-            const token = event.delta.text;
-            if (token) {
-              answer += token;
-              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ response: token })}\n\n`));
-            }
+        for await (const token of modelStream) {
+          if (token) {
+            answer += token;
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ response: token })}\n\n`));
           }
         }
         controller.enqueue(encoder.encode("data: [DONE]\n\n"));
@@ -117,23 +110,18 @@ export default {
     const v = validateMessages(body?.messages);
     if (!v.ok) return json({ error: v.error }, 400, cors);
 
-    // env.ANTHROPIC lets tests inject a fake client; production builds one from the secret.
-    const client = env.ANTHROPIC ?? new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
-
     // The last user turn is the question being asked right now; earlier turns are
     // history already recorded by their own request.
     const question = [...v.messages].reverse().find((m) => m.role === "user")?.content ?? "";
 
     try {
-      const anthropicStream = await client.messages.create({
-        model: MODEL,
-        max_tokens: MAX_TOKENS,
-        system: buildSystemPrompt(RESUME_CONTEXT),
+      const modelStream = await createModelStream(env, {
+        instructions: buildSystemPrompt(RESUME_CONTEXT),
         messages: v.messages,
-        stream: true,
+        maxTokens: MAX_TOKENS,
       });
 
-      const stream = toResponseStream(anthropicStream, (answer, error) =>
+      const stream = toResponseStream(modelStream, (answer, error) =>
         runInBackground(ctx, logChat(env, { question, answer, error })),
       );
       return new Response(stream, {
@@ -141,7 +129,7 @@ export default {
       });
     } catch (err) {
       const message = err?.message || String(err);
-      console.error("Anthropic request failed:", err?.stack || message);
+      console.error("AI request failed:", err?.stack || message);
       runInBackground(ctx, logChat(env, { question, answer: null, error: message }));
       return json({ error: "ai_unavailable" }, 502, cors);
     }
