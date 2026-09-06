@@ -2,7 +2,7 @@ export const profile = {
   name: "Suneel Kumar",
   title: "Senior Java Full Stack Developer",
   tagline:
-    "10+ years designing secure, scalable, enterprise-grade systems with Java, Spring Boot, AWS, and modern front ends — now building payment platforms that move millions of transactions a day, and the GenAI tooling that keeps them running.",
+    "10+ years building secure payment platforms, cloud-native services, and modern web applications. Java and Spring Boot at the core, with hands-on application security, AWS, GCP, and production AI.",
   phone: "281-786-5856",
   email: "suneeluhcl@gmail.com",
   // Social profiles. Every link renders ONLY when its value is non-empty, so an

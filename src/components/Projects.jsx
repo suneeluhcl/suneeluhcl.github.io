@@ -1,83 +1,49 @@
-import { ExternalLink, Github, ArrowUpRight, Check } from "lucide-react";
-import Reveal from "./Reveal.jsx";
+import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "./SectionHeading.jsx";
 import { projects } from "../data.js";
 
-const linkIcons = { ExternalLink, Github };
+// Summaries of existing résumé evidence, not new performance claims.
+const featured = [
+  { index: 0, label: "Payments & distributed systems", value: "Millions", metric: "of payments processed daily", description: "Secure fulfillment across ACH, debit, checks, balance transfers, and cross-border payments.", ownership: "Own the public fulfillment API; build vendor ingestion and batch-posting pipelines across 40+ file formats." },
+  { index: 1, label: "Application & API security", value: "PCI DSS", metric: "controls embedded end to end", description: "A real-time card-transfer service operating inside the Cardholder Data Environment.", ownership: "Built the Fastify service with proof-of-possession tokens, field-level encryption, and structured security logging." },
+  { index: 2, label: "Modernization & observability", value: "30%", metric: "faster incident response", description: "A campaign platform handling millions of user events, rebuilt around independent services.", ownership: "Led platform delivery, decomposed monoliths, and improved incident response through Splunk and CloudWatch." },
+];
+
+function ProjectDetails({ project }) {
+  return <>
+    <ul className="project-highlights">{project.highlights.map((point) => <li key={point}>{point}</li>)}</ul>
+    <ul className="tech-tags" aria-label="Technology stack">{project.stack.map((tech) => <li key={tech}>{tech}</li>)}</ul>
+    {project.links?.map((link) => <a key={link.url} href={link.url} className="text-link" target={link.url.startsWith("http") ? "_blank" : undefined} rel={link.url.startsWith("http") ? "noopener noreferrer" : undefined}>{link.label} <ArrowUpRight size={15} aria-hidden="true" /></a>)}
+  </>;
+}
 
 export default function Projects() {
   return (
-    <section id="projects" className="max-w-6xl mx-auto px-5 md:px-8 py-24">
-      <SectionHeading index="04" label="projects" title="Selected Work" />
-
-      <div className="grid gap-5 md:grid-cols-2">
-        {projects.map((project, i) => (
-          <Reveal key={project.title} delay={i * 0.12}>
-            <article className="glow-hover group h-full rounded-xl border border-line bg-card p-6 flex flex-col transition-colors hover:border-accent/50">
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  {project.org && (
-                    <p className="font-mono text-xs text-accent mb-1">{project.org}</p>
-                  )}
-                  <h3 className="text-lg font-semibold leading-snug">{project.title}</h3>
-                </div>
-                {project.links?.length > 0 && (
-                  <ArrowUpRight
-                    size={18}
-                    className="text-mut shrink-0 mt-1 transition-colors group-hover:text-accent"
-                    aria-hidden="true"
-                  />
-                )}
-              </div>
-
-              <p className="mt-2 text-sm text-mut leading-relaxed">{project.tagline}</p>
-
-              {project.highlights?.length > 0 && (
-                <ul className="mt-4 space-y-2">
-                  {project.highlights.map((point) => (
-                    <li key={point} className="flex gap-2.5 text-sm text-mut leading-relaxed">
-                      <Check size={15} className="text-accent shrink-0 mt-1" aria-hidden="true" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              <ul className="mt-5 flex flex-wrap gap-2">
-                {project.stack.map((tech) => (
-                  <li
-                    key={tech}
-                    className="font-mono text-xs px-2.5 py-1 rounded-md border border-line text-mut"
-                  >
-                    {tech}
-                  </li>
-                ))}
-              </ul>
-
-              {project.links?.length > 0 && (
-                <div className="mt-5 pt-4 border-t border-line flex flex-wrap gap-4">
-                  {project.links.map((link) => {
-                    const Icon = linkIcons[link.icon] ?? ExternalLink;
-                    const external = link.url.startsWith("http");
-                    return (
-                      <a
-                        key={link.label}
-                        href={link.url}
-                        target={external ? "_blank" : undefined}
-                        rel={external ? "noopener noreferrer" : undefined}
-                        className="font-mono text-xs text-accent inline-flex items-center gap-1.5 opacity-80 hover:opacity-100 transition-opacity"
-                      >
-                        <Icon size={14} aria-hidden="true" />
-                        {link.label}
-                      </a>
-                    );
-                  })}
-                </div>
-              )}
-            </article>
-          </Reveal>
-        ))}
+    <section id="projects" className="page-width section-space">
+      <SectionHeading index="01" label="Selected work" title="Built for real-world complexity." />
+      <p className="section-intro">A closer look at the systems I’ve helped deliver—and the work I owned.</p>
+      <div className="featured-grid">
+        {featured.map((item) => {
+          const project = projects[item.index];
+          return <article className="case-card" key={project.title}>
+            <p className="eyebrow">{item.label}</p>
+            <div className="case-metric"><strong>{item.value}</strong><span>{item.metric}</span></div>
+            <div className="case-body">
+              <p className="case-company">{project.org}</p>
+              <h3>{project.title}</h3><p>{item.description}</p>
+              <div className="ownership"><span>My contribution</span><p>{item.ownership}</p></div>
+            </div>
+            <details className="case-details"><summary>Explore the engineering<span aria-hidden="true">+</span></summary><ProjectDetails project={project} /></details>
+          </article>;
+        })}
       </div>
+      <details className="more-work">
+        <summary>More enterprise work <span>Healthcare, commerce &amp; web platforms</span><span aria-hidden="true">+</span></summary>
+        <div className="additional-projects">
+          {projects.slice(3).map((project) => <article key={project.title}><p className="case-company">{project.org}</p><h3>{project.title}</h3><p>{project.tagline}</p><ProjectDetails project={project} /></article>)}
+        </div>
+      </details>
+      <p className="confidentiality-note">Enterprise work; source code is private. These summaries describe my contributions without sharing proprietary code.</p>
     </section>
   );
 }

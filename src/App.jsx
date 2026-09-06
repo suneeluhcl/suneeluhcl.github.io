@@ -13,15 +13,16 @@ import ChatAssistant from "./components/ChatAssistant.jsx";
 export default function App() {
   return (
     <>
+      <a href="#main-content" className="skip-link">Skip to content</a>
       <Navbar />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Hero />
+        <Projects />
+        <Experience />
         <About />
         <Skills />
-        <Experience />
-        <Projects />
-        <Education />
         <Certifications />
+        <Education />
         <Contact />
       </main>
       <Footer />
