@@ -21,7 +21,7 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
-html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+html { scroll-behavior: smooth; }
 body { background: var(--c-base); color: var(--c-ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 button, summary { cursor: pointer; }
 a, button, summary { -webkit-tap-highlight-color: transparent; }

@@ -1,15 +1,30 @@
 # Suneel Kumar — Portfolio
 
-Single-page portfolio for a Sr. Java Fullstack Developer. Dark-themed by default with a light-mode
-toggle, smooth-scroll navigation, scroll-reveal animations, and a terminal/engineering aesthetic.
+Recruiter-focused portfolio for a senior Java full-stack developer with application and
+cloud security experience. Includes dark/light themes, selected enterprise work, two
+clearly scoped role tracks, and prominent résumé/contact links.
+
+## Recruiter positioning
+
+- Historical job titles, employers, dates, and credentials stay unchanged.
+- The cybersecurity role track describes application security, cloud security, IAM,
+  encryption, vulnerability remediation, and secure software delivery. It does not
+  claim SOC, penetration-testing, or forensics experience.
+- Project summaries use existing résumé evidence. Do not add unverified metrics or
+  proprietary code. Full project and career details use native HTML disclosures so
+  the content remains available without JavaScript.
+- The existing PDF is preserved; changes to the master résumé follow
+  [resume/README.md](resume/README.md). Website presentation is not a replacement
+  for a separately reviewed security-targeted résumé.
+- Browser review artifacts in `output/playwright/` and `.playwright-cli/` are local
+  only. Never push `main` without approval: that publishes the live site.
 
 ## Stack
 
 - [React 19](https://react.dev) + [Vite](https://vitejs.dev)
 - [Tailwind CSS v4](https://tailwindcss.com) (CSS-first config, class-based dark mode)
 - [lucide-react](https://lucide.dev) — icons
-- Scroll reveals, the typing effect, and counters are plain CSS + `IntersectionObserver`
-  (no animation library)
+- Native HTML disclosures and lightweight React interactions; no animation library
 
 ## Run locally
 
