@@ -49,15 +49,15 @@ export default function Contact() {
 
   return (
     <section id="contact" className="max-w-6xl mx-auto px-5 md:px-8 py-24">
-      <SectionHeading index="07" label="contact" title="Get In Touch" />
+      <SectionHeading index="06" label="Start a conversation" title="Let’s build something dependable." />
 
       <div className="grid gap-10 lg:grid-cols-2">
         <Reveal>
           <div>
             <p className="text-mut leading-relaxed max-w-md">
-              I'm open to senior fullstack, platform, and modernization roles. Whether you have a
-              question, an opportunity, or just want to talk shop about Java and AWS — my inbox is
-              always open.
+              Hiring for Java full stack, application security, or cloud security?
+              Share the role, team, and engineering challenge. I’d welcome a conversation
+              about where my experience can contribute.
             </p>
             <div className="mt-8 space-y-4 font-mono text-sm">
               <a
@@ -115,6 +115,7 @@ export default function Contact() {
               <input
                 id="name"
                 name="name"
+                autoComplete="name"
                 type="text"
                 required
                 disabled={status === "sending"}
@@ -131,6 +132,7 @@ export default function Contact() {
               <input
                 id="email"
                 name="email"
+                autoComplete="email"
                 type="email"
                 required
                 disabled={status === "sending"}
@@ -152,7 +154,7 @@ export default function Contact() {
                 rows={5}
                 value={form.message}
                 onChange={handleChange}
-                placeholder="Let's talk about..."
+                placeholder="Tell me about the role, team, and what you’re building…"
                 className={`${inputClasses} resize-y`}
               />
             </div>

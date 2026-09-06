@@ -8,6 +8,7 @@ const SITE_URL = "https://suneelkumarbikkasani.com/";
 const KNOWS_ABOUT = [
   "Java", "Spring Boot", "Microservices", "AWS", "Google Cloud", "Kubernetes",
   "Apache Kafka", "GenAI", "AI Agents", "Payment Systems", "Cloud Security",
+  "Application Security", "Secure Software Development", "OAuth2", "Identity and Access Management",
 ];
 
 // "Houston, TX" -> { addressLocality: "Houston", addressRegion: "TX" }
