@@ -1,8 +1,8 @@
 export const profile = {
   name: "Suneel Kumar",
-  title: "Senior Java Full Stack Developer",
+  title: "AI Engineer · Full Stack Developer · Application Security Engineer",
   tagline:
-    "10+ years building secure payment platforms, cloud-native services, and modern web applications. Java and Spring Boot at the core, with hands-on application security, AWS, GCP, and production AI.",
+    "I build production AI, secure APIs, and the applications around them. 10+ years delivering enterprise software across financial services, healthcare, and commerce—with hands-on AI agents, Java, Python, React, AWS, and application security.",
   phone: "281-786-5856",
   email: "suneeluhcl@gmail.com",
   // Social profiles. Every link renders ONLY when its value is non-empty, so an
@@ -23,10 +23,10 @@ export const availability = {
 };
 
 export const about = [
-  "I'm a senior engineer with a decade of experience turning complex business problems into clean, resilient software. Today I work in Capital One's Payments Fulfillment domain, building the systems that fulfill every credit card payment — ACH, debit, check, balance transfers, and cross-border EFT — processing millions of financial transactions per day.",
+  "I'm a senior software engineer connecting AI engineering, full-stack delivery, and application security. In my most recent Capital One assignment, I built payment fulfillment services and AI tooling for engineering and operations teams. I'm now available for my next opportunity.",
   "My foundation is modern Java: I led my team's first production migration to Java 21 and Spring Boot 4, and I've driven Java 8 → 17 modernizations, Jakarta EE 10 upgrades, and zero-downtime monolith decompositions. But I'm deliberately polyglot — production Go, Python, and TypeScript microservices, plus big-data pipelines in Apache Spark on EMR, Databricks, Kafka, and Flink SQL feeding Snowflake and OneLake.",
   "Security isn't an afterthought in my work — it's the architecture. OAuth2, OIDC, JWT, mutual TLS/PKI, field-level and PGP encryption, least-privilege IAM, and PCI DSS / NIST 800-53 compliance are embedded in everything I ship. On AWS I design event-driven microservices across ECS Fargate, Lambda, Step Functions, DynamoDB, SQS, and EventBridge — deployed active/active across regions with automated failover.",
-  "And I build with AI, not just talk about it. I've shipped a production LLM inference service that guides daily payment operations, authored reusable AI agent skills (Claude Code) that partner teams use to automate their workflows, and I hold AWS Solutions Architect – Professional and Google Cloud Professional Machine Learning Engineer certifications.",
+  "My AI work includes a Python/FastAPI LLM inference service for payment operations, reusable agent skills for Jira, pull requests, Confluence, and CI/CD, and an internal skills registry and CLI for Claude Code and Windsurf. I hold AWS Solutions Architect – Professional and Google Cloud Professional Machine Learning Engineer certifications.",
 ];
 
 export const skillCategories = [
@@ -78,7 +78,7 @@ export const skillCategories = [
     title: "AI / GenAI",
     icon: "BrainCircuit",
     items: [
-      "LLM Integration", "AI Agents & Agentic Workflows", "Claude Code", "Prompt Engineering",
+      "LLM Integration", "AI Agents & Agentic Workflows", "Reusable Agent Skills", "Claude Code", "Windsurf", "Prompt Engineering",
       "RAG", "GenAI Inference Services", "Vertex AI", "MLOps",
     ],
   },
@@ -87,7 +87,7 @@ export const skillCategories = [
     icon: "ShieldCheck",
     items: [
       "OAuth2", "OIDC", "JWT", "SAML", "Mutual TLS / PKI", "KMS Encryption", "PGP",
-      "Vault", "Checkmarx", "PCI DSS", "NIST 800-53", "LDAP/AD",
+      "Vault", "Checkmarx", "Mend / SCA", "CVE Remediation", "Threat Modeling", "Least-Privilege IAM", "WS-Security", "SiteMinder", "PCI DSS", "NIST 800-53", "LDAP/AD",
     ],
   },
   {
@@ -112,17 +112,21 @@ export const experience = [
     company: "Capital One",
     location: "Richmond, VA",
     title: "Senior Java Full Stack Developer",
-    dates: "Nov 2023 – Present",
-    stack: ["Java 17/21", "Spring Boot 3/4", "Go", "Python", "AWS", "Spark/EMR", "Kafka", "GenAI"],
+    dates: "From Nov 2023 · Completed assignment",
+    current: false,
+    focus: "AI agents & automation · Payment platforms · Application security",
+    stack: ["Java 17/21", "Spring Boot 3/4", "Python / FastAPI", "Claude Code", "Windsurf", "AWS", "Go", "Kafka", "Application Security"],
     bullets: [
-      "Build mission-critical payment fulfillment microservices processing millions of credit card payments per day — ACH, debit, check, balance transfers, and cross-border EFT.",
-      "Own the public-facing Fulfillment API (Java 17, Spring Boot 3.x on ECS Fargate) secured with OAuth2, mutual TLS, and field-level encryption.",
+      "Built payment fulfillment services, production AI tooling, and reusable agent workflows in a regulated banking environment.",
+      "Developed a Python/FastAPI LLM inference service that summarized historical payment-file processing, surfaced patterns and anomalies, and supported end-of-day operational decisions through a Slack bot.",
+      "Maintained an internal AI skills registry and CLI for Claude Code and Windsurf; authored reusable Jira, pull-request, Confluence, and CI/CD skills adopted by partner teams.",
+      "Applied agentic workflows to code generation, refactoring, and test scaffolding; shared reusable prompts and skill patterns across engineering teams.",
+      "Built the public-facing Fulfillment API (Java 17, Spring Boot 3.x on ECS Fargate) secured with OAuth2, mutual TLS, and field-level encryption for sensitive payment data.",
       "Led the first production migration to Java 21 / Spring Boot 4, hardened with Resilience4j circuit breakers and SQS retry/fallback queues.",
       "Built vendor file ingestion on AWS Step Functions (40+ vendor formats) and the EMR Spark pipeline generating TSYS posting files with automated reconciliation.",
-      "Contribute to a next-generation real-time money movement platform in Go — event-driven, outbox-patterned, active/active across two AWS regions.",
-      "Ship GenAI tooling: a FastAPI LLM inference service guiding end-of-day payment operations, plus reusable AI agent skills (Claude Code) adopted by partner teams.",
-      "Engineer data pipelines with Databricks PySpark, Flink SQL, and Kafka, publishing governed datasets to Snowflake and Microsoft OneLake.",
-      "Embed security across the SDLC — Checkmarx/SonarQube/Mend remediation, Secrets Manager and Vault, PGP file encryption, PCI DSS / NIST 800-53 controls.",
+      "Contributed to a real-time money movement platform in Go — event-driven, outbox-patterned, active/active across two AWS regions.",
+      "Engineered data pipelines with Databricks PySpark, Flink SQL, and Kafka, publishing governed datasets to Snowflake and Microsoft OneLake.",
+      "Remediated Checkmarx, SonarQube, and Mend findings and dependency CVEs; implemented least-privilege IAM, Secrets Manager/Vault, and PGP encryption aligned with PCI DSS and NIST 800-53 controls.",
     ],
     environment:
       "Java 17/21, Spring Boot 3.x/4.x, Go, Python, TypeScript, React, Apache Spark (EMR), Databricks, Flink, Kafka, AWS (ECS Fargate, Lambda, Step Functions, DynamoDB, S3, SQS, EventBridge, EMR, Glue), Snowflake, OneLake, Docker, Jenkins, Splunk, OpenTelemetry",
@@ -132,6 +136,7 @@ export const experience = [
     location: "Durham, NC",
     title: "Full Stack Java Developer",
     dates: "May 2022 – Oct 2023",
+    focus: "Full-stack delivery · Threat modeling · Identity & access",
     stack: ["Java 8/11", "Spring Boot", "React.js", "Angular", "AWS ECS", "Lambda", "DynamoDB", "Splunk"],
     bullets: [
       "Led delivery of the Symphony Campaign Processing platform handling millions of user events.",
@@ -146,6 +151,7 @@ export const experience = [
     location: "Richmond, VA",
     title: "Senior Java Full Stack Developer",
     dates: "Aug 2021 – Apr 2022",
+    focus: "Full-stack delivery · API authentication · AWS IAM",
     stack: ["Java 8", "Spring Boot 2.x", "Angular 8", "Hibernate 5.x", "Docker", "Jenkins"],
     bullets: [
       "Built Angular 8 UI with reactive forms, custom directives, and RxJS observables.",
@@ -159,9 +165,11 @@ export const experience = [
     location: "Chicago, IL",
     title: "Java Full Stack Application Developer",
     dates: "Jun 2020 – Jul 2021",
+    focus: "Healthcare applications · API security · Cloud access controls",
     stack: ["Java 8", "Spring Boot", "Angular 5/6", "GCP", "GKE", "BigQuery", "MongoDB", "Cassandra"],
     bullets: [
       "Built SPAs with Angular 6, RxJS, reactive forms, and custom pipes.",
+      "Secured Spring REST APIs with OAuth2/JWT and Angular token interceptors; used Cloud IAM for access control and Secret Manager for credential handling.",
       "Deployed containerized Spring Boot microservices to Google Kubernetes Engine (GKE) on Google Cloud Platform, with Cloud Build CI/CD and Artifact Registry.",
       "Built event-driven integrations using Cloud Pub/Sub and Cloud Functions, with Cloud Storage for artifacts and Secret Manager for credentials.",
       "Modeled operational data across Cloud SQL and Cassandra/MongoDB, and fed analytics datasets into BigQuery for reporting.",
@@ -174,9 +182,11 @@ export const experience = [
     location: "Denver, CO",
     title: "Java Full Stack Developer",
     dates: "Jul 2018 – May 2020",
+    focus: "Commerce platforms · Secure REST APIs · Cloud delivery",
     stack: ["Java 8", "Spring Boot", "Angular 2", "Node.js", "MongoDB", "Oracle", "Docker", "AWS", "GCP", "GKE"],
     bullets: [
       "Built Angular 2 + Node.js responsive UI modules with component-based architecture and Angular routing.",
+      "Protected Spring Boot REST endpoints with OAuth2 and JWT while integrating distributed application services.",
       "Integrated BRMS (ILOG JRules) for rule-based decision services.",
       "Deployed Dockerized microservices across AWS EC2 and Google Cloud Platform — GKE and Compute Engine — with Cloud Build/Container Registry and Stackdriver monitoring.",
       "Integrated Cloud Pub/Sub for async messaging and Cloud Storage for object storage, with Cloud SQL alongside MongoDB and Oracle.",
@@ -188,10 +198,12 @@ export const experience = [
     location: "Oklahoma City, OK",
     title: "Senior Java Developer",
     dates: "Mar 2017 – Jun 2018",
+    focus: "Enterprise Java · Authentication & authorization · Web services",
     stack: ["Java 7/8", "Spring 3.0", "Hibernate 3.5", "JSF 2.0", "PrimeFaces", "WebSphere 8.1"],
     bullets: [
       "Designed architecture with UML/GoF patterns, Spring 3.0 (IOC/AOP), and Hibernate 3.5.",
       "Built SOAP/REST services (JAX-WS, JAX-RS, Apache CXF, JAXB, WSDL, XSLT).",
+      "Integrated authentication and authorization using SiteMinder in the WebSphere application environment.",
       "Integrated JSF 2.0 + PrimeFaces UI, deployed on IBM WebSphere 8.1.",
     ],
     environment: "Java 7/8, Spring, Hibernate, Angular 2, JSF, PrimeFaces, WebSphere",
@@ -201,10 +213,12 @@ export const experience = [
     location: "Southfield, MI",
     title: "Java Developer",
     dates: "Sep 2015 – Feb 2017",
+    focus: "Service integration · WS-Security · Certificate-based identity",
     stack: ["Java", "Spring", "Hibernate", "Mule ESB", "Oracle", "WebSphere", "Ant/Ivy"],
     bullets: [
       "Built SOAP/REST service framework with XML marshalling and Mule ESB orchestration.",
       "Implemented EJB-based business logic and x.509 certificate-based authentication.",
+      "Implemented WS-Security in Mule ESB integrations, with certificate-based authentication and public/private-key encryption for service communication.",
       "Deployed on IBM WebSphere, built with Apache Ant/Ivy.",
     ],
     environment: "Java, Spring, Hibernate, JAX-RS/JAX-WS, Mule ESB, Oracle, WebSphere",
