@@ -31,8 +31,9 @@ test("résumé content is readable without executing JavaScript", async ({ reque
 
   // Guard against a regression to the empty-<body> SPA shell.
   expect(html.length).toBeGreaterThan(50_000);
-  expect(html).not.toContain("Current engagement");
-  expect(html).not.toContain("Nov 2023 – Present");
+  expect(html).toContain("Nov 2023 – Present");
+  expect(html).toContain("Assignment ending soon");
+  expect(html).not.toContain("Completed assignment");
 });
 
 test("configured social profiles reach crawlers in the static HTML", async ({ request }) => {

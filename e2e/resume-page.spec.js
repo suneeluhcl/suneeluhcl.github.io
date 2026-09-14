@@ -48,7 +48,7 @@ test("declares itself as a Person at the canonical résumé URL", async ({ reque
   const data = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
 
   expect(data["@type"]).toBe("Person");
-  expect(data.worksFor).toBeUndefined();
+  expect(data.worksFor).toEqual([{ "@type": "Organization", name: "Capital One" }]);
   expect(data.url).toBe("https://suneelkumarbikkasani.com/resume/");
   expect(html).toContain('<link rel="canonical" href="https://suneelkumarbikkasani.com/resume/">');
 });
