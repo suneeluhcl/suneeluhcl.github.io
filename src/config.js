@@ -9,6 +9,9 @@ if (import.meta.env.PROD && !configuredUrl) {
 }
 
 export const CHAT_API_URL = configuredUrl ?? "http://localhost:8787";
+// Enable in production only after deploying the regenerated résumé context.
+// The previous Cloudflare authorization expired during the profile refresh.
+export const RESUME_ASSISTANT_ENABLED = import.meta.env.DEV || import.meta.env.VITE_RESUME_ASSISTANT_ENABLED === "true";
 
 // Same Worker, dedicated route (see worker/src/index.js).
 export const CONTACT_API_URL = `${CHAT_API_URL.replace(/\/+$/, "")}/contact`;

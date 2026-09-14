@@ -16,6 +16,11 @@ test("résumé content is readable without executing JavaScript", async ({ reque
     "Senior Java Full Stack Developer",
     "Fidelity Investments",
     "AWS Certified Solutions Architect",
+    "AI Skills &amp; Operations Automation",
+    "AI Engineer",
+    "Cybersecurity Engineer",
+    "SiteMinder",
+    "WS-Security",
     // Read from data.js rather than hardcoded, so editing the logistics strip
     // updates the assertion instead of breaking it.
     ...Object.values(availability).filter(Boolean),
@@ -25,6 +30,8 @@ test("résumé content is readable without executing JavaScript", async ({ reque
 
   // Guard against a regression to the empty-<body> SPA shell.
   expect(html.length).toBeGreaterThan(50_000);
+  expect(html).not.toContain("Current engagement");
+  expect(html).not.toContain("Nov 2023 – Present");
 });
 
 test("configured social profiles reach crawlers in the static HTML", async ({ request }) => {
@@ -64,4 +71,6 @@ test("hydrates without React errors or mismatches", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
   expect(errors, `console errors during hydration:\n${errors.join("\n")}`).toHaveLength(0);
+  await page.getByLabel("Ask my résumé", { exact: true }).click();
+  await expect(page.getByRole("link", { name: "Read my current résumé" })).toHaveAttribute("href", "/resume/");
 });

@@ -47,6 +47,13 @@ VITE_CHAT_API_URL="https://portfolio-chat-worker.<subdomain>.workers.dev" npm ru
 After résumé changes, regenerate the context, deploy the Worker, rebuild the frontend,
 and deploy the site so both surfaces stay aligned.
 
+The September 2026 profile refresh temporarily gates the production assistant while
+Cloudflare reauthentication is pending. The site shows links to the current résumé
+instead of sending questions to an outdated context. After `wrangler login`, run
+`node scripts/gen-resume-context.mjs` from the repository root, deploy this Worker,
+then set `VITE_RESUME_ASSISTANT_ENABLED=true` in the production build environment
+and deploy the website. Keep the gate off until the Worker deployment succeeds.
+
 ## Contact form
 
 The route sends through Resend. Until configured, it returns `503` and the frontend shows

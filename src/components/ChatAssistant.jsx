@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { MessageSquare, X, Send } from "lucide-react";
 import { useChat } from "../hooks/useChat.js";
+import { RESUME_ASSISTANT_ENABLED } from "../config.js";
 
 const STARTERS = [
   "What application and cloud security experience does he have?",
@@ -37,6 +38,7 @@ export default function ChatAssistant() {
       {open && (
         <div id="resume-assistant" role="dialog" aria-label="Résumé assistant" className="chat-panel" onKeyDown={(event) => { if (event.key === "Escape") { event.stopPropagation(); close(); } }}>
           <div className="chat-heading"><div><strong>Ask my résumé</strong><p>AI answers based on my experience</p></div><button aria-label="Close assistant panel" onClick={close} className="icon-button"><X size={17} aria-hidden="true" /></button></div>
+          {!RESUME_ASSISTANT_ENABLED ? <div className="chat-messages"><p>The assistant is being updated with my latest experience.</p><p><a className="text-link" href="/resume/">Read my current résumé</a></p><p><a className="text-link" href="#contact" onClick={close}>Discuss an opportunity</a></p></div> : <>
           <div ref={scrollRef} className="chat-messages" aria-busy={busy}>
             <div role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions text">
               {messages.map((message, index) => <div key={index} className={message.role === "user" ? "chat-message chat-user" : "chat-message"}><span>{message.content || (busy ? "…" : "")}</span></div>)}
@@ -48,6 +50,7 @@ export default function ChatAssistant() {
             <input ref={inputRef} aria-label="Your question" value={input} onChange={(event) => setInput(event.target.value)} placeholder="Ask about Suneel's experience…" disabled={busy} />
             <button type="submit" disabled={busy || !input.trim()} aria-label="Send"><Send size={17} aria-hidden="true" /></button>
           </form>
+          </>}
         </div>
       )}
     </div>
