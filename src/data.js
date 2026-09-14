@@ -17,13 +17,13 @@ export const profile = {
 // hide that single item; the whole strip hides when all four are empty.
 export const availability = {
   location: "Dallas, TX",
-  arrangement: "Remote only",
-  workAuth: "H-1B — transfer required",
+  arrangement: "Remote or Dallas-area hybrid",
+  workAuth: "H-1B — sponsorship and transfer required",
   status: "Available immediately",
 };
 
 export const about = [
-  "I'm a senior software engineer connecting AI engineering, full-stack delivery, and application security. In my most recent Capital One assignment, I built payment fulfillment services and AI tooling for engineering and operations teams. I'm now available for my next opportunity.",
+  "I'm a senior software engineer connecting AI engineering, full-stack delivery, and application security. In my current Capital One assignment, I build payment fulfillment services and AI tooling for engineering and operations teams. The assignment is expected to end soon, and I'm available for my next opportunity immediately.",
   "My foundation is modern Java: I led my team's first production migration to Java 21 and Spring Boot 4, and I've driven Java 8 → 17 modernizations, Jakarta EE 10 upgrades, and zero-downtime monolith decompositions. But I'm deliberately polyglot — production Go, Python, and TypeScript microservices, plus big-data pipelines in Apache Spark on EMR, Databricks, Kafka, and Flink SQL feeding Snowflake and OneLake.",
   "Security isn't an afterthought in my work — it's the architecture. OAuth2, OIDC, JWT, mutual TLS/PKI, field-level and PGP encryption, least-privilege IAM, and PCI DSS / NIST 800-53 compliance are embedded in everything I ship. On AWS I design event-driven microservices across ECS Fargate, Lambda, Step Functions, DynamoDB, SQS, and EventBridge — deployed active/active across regions with automated failover.",
   "My AI work includes a Python/FastAPI LLM inference service for payment operations, reusable agent skills for Jira, pull requests, Confluence, and CI/CD, and an internal skills registry and CLI for Claude Code and Windsurf. I hold AWS Solutions Architect – Professional and Google Cloud Professional Machine Learning Engineer certifications.",
@@ -112,8 +112,8 @@ export const experience = [
     company: "Capital One",
     location: "Richmond, VA",
     title: "Senior Java Full Stack Developer",
-    dates: "From Nov 2023 · Completed assignment",
-    current: false,
+    dates: "Nov 2023 – Present · Assignment ending soon",
+    current: true,
     focus: "AI agents & automation · Payment platforms · Application security",
     stack: ["Java 17/21", "Spring Boot 3/4", "Python / FastAPI", "Claude Code", "Windsurf", "AWS", "Go", "Kafka", "Application Security"],
     bullets: [
