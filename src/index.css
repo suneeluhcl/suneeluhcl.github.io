@@ -125,7 +125,8 @@ details[open] > summary > span[aria-hidden] { transform: rotate(45deg); }
 .text-link { display: inline-flex; align-items: center; gap: 8px; font-size: .78rem; color: var(--c-accent); padding-block: 8px; }
 .about-copy p { font-size: .92rem; line-height: 1.85; color: var(--c-mut); margin-bottom: 20px; }
 .about-copy summary { border-top: 1px solid var(--c-line); margin-bottom: 16px; }
-.role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin: 34px 0 28px; }
+.role-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin: 34px 0 28px; }
+.career-focus { color: var(--c-accent); font-size: .78rem; line-height: 1.7; margin: 8px 0; }
 .role-card { border: 1px solid var(--c-line); border-radius: 10px; padding: 30px; background: var(--c-card); }
 .role-card > svg { color: var(--c-accent); margin-bottom: 23px; }
 .role-card h3 { font-size: 1.3rem; font-weight: 600; letter-spacing: -.025em; }

@@ -4,9 +4,9 @@ import { projects } from "../data.js";
 
 // Summaries of existing résumé evidence, not new performance claims.
 const featured = [
-  { index: 0, label: "Payments & distributed systems", value: "Millions", metric: "of payments processed daily", description: "Secure fulfillment across ACH, debit, checks, balance transfers, and cross-border payments.", ownership: "Own the public fulfillment API; build vendor ingestion and batch-posting pipelines across 40+ file formats." },
+  { index: 6, label: "AI engineering & agent workflows", value: "Production AI", metric: "from reusable skills to operational support", description: "Agent skills for engineering teams and an LLM service supporting payment operations.", ownership: "Built reusable skills, maintained the registry and CLI, and developed the FastAPI inference service and prompt templates." },
+  { index: 0, label: "Full-stack & distributed systems", value: "Millions", metric: "of payments processed daily", description: "Secure fulfillment across ACH, debit, checks, balance transfers, and cross-border payments.", ownership: "Built the public fulfillment API, vendor ingestion, and batch-posting pipelines across 40+ file formats." },
   { index: 1, label: "Application & API security", value: "PCI DSS", metric: "controls embedded end to end", description: "A real-time card-transfer service operating inside the Cardholder Data Environment.", ownership: "Built the Fastify service with proof-of-possession tokens, field-level encryption, and structured security logging." },
-  { index: 2, label: "Modernization & observability", value: "30%", metric: "faster incident response", description: "A campaign platform handling millions of user events, rebuilt around independent services.", ownership: "Led platform delivery, decomposed monoliths, and improved incident response through Splunk and CloudWatch." },
 ];
 
 function ProjectDetails({ project }) {
@@ -40,7 +40,7 @@ export default function Projects() {
       <details className="more-work">
         <summary>More enterprise work <span>Healthcare, commerce &amp; web platforms</span><span aria-hidden="true">+</span></summary>
         <div className="additional-projects">
-          {projects.slice(3).map((project) => <article key={project.title}><p className="case-company">{project.org}</p><h3>{project.title}</h3><p>{project.tagline}</p><ProjectDetails project={project} /></article>)}
+          {projects.filter((_,index) => !featured.some(item => item.index === index)).map((project) => <article key={project.title}><p className="case-company">{project.org}</p><h3>{project.title}</h3><p>{project.tagline}</p><ProjectDetails project={project} /></article>)}
         </div>
       </details>
       <p className="confidentiality-note">Enterprise work; source code is private. These summaries describe my contributions without sharing proprietary code.</p>

@@ -1,12 +1,12 @@
 # Suneel Kumar — Portfolio
 
 Recruiter-focused portfolio for a senior Java full-stack developer with application and
-cloud security experience. Includes dark/light themes, selected enterprise work, two
+cloud security experience. Includes dark/light themes, selected enterprise work, three
 clearly scoped role tracks, and prominent résumé/contact links.
 
 ## Recruiter positioning
 
-- Historical job titles, employers, dates, and credentials stay unchanged.
+- Historical job titles, employers, and credentials stay accurate. Capital One is a completed assignment; its exact end month is awaiting confirmation.
 - The cybersecurity role track describes application security, cloud security, IAM,
   encryption, vulnerability remediation, and secure software delivery. It does not
   claim SOC, penetration-testing, or forensics experience.

@@ -236,7 +236,7 @@ export const projects = [
       "The engine that fulfills every card payment at a top-5 US bank — millions of transactions a day across ACH, debit, check, balance transfers, and cross-border EFT.",
     stack: ["Java 17/21", "Go", "Python", "Spring Boot", "AWS", "Spark / EMR", "Kafka", "GenAI"],
     highlights: [
-      "Own the public payment-fulfillment API and core services (Spring Boot on ECS Fargate) plus a next-generation real-time money-movement platform in Go — event-driven and active/active across two AWS regions.",
+      "Built the public payment-fulfillment API and core services (Spring Boot on ECS Fargate) and contributed to a real-time money-movement platform in Go — event-driven and active/active across two AWS regions.",
       "Built the vendor-file ingestion and batch-posting pipeline on AWS Step Functions + EMR Spark (40+ file formats) with automated reconciliation to the card processor.",
       "Shipped GenAI ops tooling — an LLM inference service that guides end-of-day payment decisions — and embedded PCI DSS / NIST 800-53 security (OAuth2, mutual TLS, PGP, KMS) across the SDLC.",
     ],
@@ -298,6 +298,18 @@ export const projects = [
       "Architected the system with Spring (IOC/AOP) and Hibernate using UML and GoF design patterns.",
       "Delivered SOAP and REST services (JAX-WS, JAX-RS, Apache CXF) powering template personalization at scale.",
       "Built the JSF 2.0 + PrimeFaces UI, deployed on IBM WebSphere.",
+    ],
+  },
+  {
+    title: "AI Skills & Operations Automation",
+    org: "Capital One",
+    tagline: "Reusable agent workflows for engineering teams, alongside a production LLM service supporting payment operations.",
+    stack: ["Python", "FastAPI", "Claude Code", "Windsurf", "Prompt Engineering", "AWS ECS Fargate"],
+    highlights: [
+      "Maintained an internal AI skills registry and CLI for Claude Code and Windsurf, organizing reusable skills for engineering teams.",
+      "Authored Jira, pull-request, Confluence, and CI/CD agent skills adopted by partner teams; applied agentic workflows to refactoring and test scaffolding.",
+      "Built a FastAPI LLM inference service that summarized historical payment-file processing and surfaced typical patterns and anomalies through a Slack bot for operational decision support.",
+      "Designed reusable prompt templates for operational summaries and shared prompt and skill patterns across teams.",
     ],
   },
 ];

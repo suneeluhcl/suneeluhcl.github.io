@@ -9,10 +9,10 @@ export default function Experience() {
       <ol className="career-list">
         {experience.map((job, index) => <li key={job.company + job.dates}>
           <article className="career-entry">
-            <div className="career-date"><span>{job.dates}</span>{index === 0 && <span className="current-label">Current engagement</span>}</div>
+            <div className="career-date"><span>{job.dates}</span>{index === 0 && <span className="current-label">Most recent engagement</span>}</div>
             <div className="career-content">
               <div className="career-heading"><h3>{job.company}</h3><span>{job.location}</span></div>
-              <p className="career-title">{job.title}</p><p className="career-summary">{job.bullets[0]}</p>
+              <p className="career-title">{job.title}</p>{job.focus && <p className="career-focus">{job.focus}</p>}<p className="career-summary">{job.bullets[0]}</p>
               <details className="career-details">
                 <summary>Role details &amp; technologies <span aria-hidden="true">+</span></summary>
                 <ul className="project-highlights">{job.bullets.slice(1).map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>

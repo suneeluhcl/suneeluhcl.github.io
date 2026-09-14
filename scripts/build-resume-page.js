@@ -117,7 +117,7 @@ function jsonLd() {
       ...(c.issuer && { recognizedBy: { "@type": "Organization", name: c.issuer } }),
       ...(c.url && { url: c.url }),
     })),
-    worksFor: experience.slice(0, 1).map((e) => ({ "@type": "Organization", name: e.company })),
+    ...(experience.some(e => e.current) && { worksFor: experience.filter(e => e.current).map((e) => ({ "@type": "Organization", name: e.company })) }),
   };
 }
 

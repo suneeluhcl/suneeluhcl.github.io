@@ -1,10 +1,16 @@
-import { Code2, ShieldCheck, ArrowUpRight } from "lucide-react";
+import { Code2, ShieldCheck, BrainCircuit, ArrowUpRight } from "lucide-react";
 import SectionHeading from "./SectionHeading.jsx";
 import { skillCategories } from "../data.js";
 
 const tracks = [
   {
-    title: "Java Full Stack Engineer", icon: Code2, scope: "Application delivery · Distributed systems · Cloud platforms",
+    title: "AI Engineer", icon: BrainCircuit, scope: "Applied GenAI · Agent workflows · Engineering automation",
+    description: "Production LLM integration and reusable agent skills that support real engineering and operational workflows—from Jira and pull requests to payment-file analysis.",
+    technologies: ["Python", "FastAPI", "LLM Integration", "AI Agents", "Claude Code", "Windsurf", "Prompt Engineering", "RAG", "AWS", "Vertex AI"],
+    href: "#projects", evidence: "Explore AI skills & operations automation",
+  },
+  {
+    title: "Full Stack Developer", icon: Code2, scope: "Java & Spring Boot · Distributed systems · Cloud platforms",
     description: "End-to-end delivery of enterprise applications: secure APIs, event-driven services, responsive interfaces, and production operations.",
     technologies: ["Java 17/21", "Spring Boot", "React", "Angular", "TypeScript", "AWS", "GCP", "Kafka", "Docker", "Kubernetes", "SQL", "JUnit / Mockito"],
     href: "#experience", evidence: "See enterprise delivery experience",
@@ -20,8 +26,8 @@ const tracks = [
 export default function Skills() {
   return (
     <section id="skills" className="page-width section-space">
-      <SectionHeading index="03" label="Role fit & expertise" title="Engineering depth. Security built in." />
-      <p className="section-intro">Two closely connected role tracks, grounded in the same production experience. My cybersecurity focus is application and cloud security.</p>
+      <SectionHeading index="03" label="Role fit & expertise" title="Three disciplines. One production mindset." />
+      <p className="section-intro">AI Engineer, Full Stack Developer, and Cybersecurity Engineer roles—grounded in enterprise delivery. My security specialization is application and cloud security.</p>
       <div className="role-grid">{tracks.map(({ title, icon: Icon, scope, description, technologies, href, evidence }) => <article className="role-card" key={title}>
         <Icon size={26} aria-hidden="true" /><h3>{title}</h3><p className="role-scope">{scope}</p><p>{description}</p>
         <ul className="tech-tags">{technologies.map((tech) => <li key={tech}>{tech}</li>)}</ul>

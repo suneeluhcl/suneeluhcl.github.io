@@ -8,9 +8,9 @@ export default function Hero() {
     <section id="top" className="hero-section">
       <div className="page-width hero-layout">
         <div className="hero-copy">
-          <p className="eyebrow">Java full stack · Application & cloud security</p>
+          <p className="eyebrow">AI engineering · Full-stack development · Application security</p>
           <h1>{profile.name}<span className="text-accent">.</span></h1>
-          <p className="hero-statement">Built to perform.<br />Designed to be secure.</p>
+          <p className="hero-statement">Intelligent systems.<br />Secure foundations.</p>
           <p className="hero-description">{profile.tagline}</p>
           <div className="hero-actions">
             <a href="/resume.pdf" download="Suneel-Kumar-Resume.pdf" className="button-primary"><FileDown size={18} aria-hidden="true" /> Download résumé</a>
@@ -21,7 +21,7 @@ export default function Hero() {
         <div className="profile-card">
           <div className="portrait-frame">
             <img src={portrait} alt="Suneel Kumar" width="640" height="640" loading="eager" fetchPriority="high" decoding="async" />
-            <div className="portrait-caption"><span className="status-dot" /> Full-stack delivery.<br />Security at every layer.</div>
+            <div className="portrait-caption"><span className="status-dot" /> Production AI. Full-stack delivery.<br />Security at every layer.</div>
           </div>
           <div className="profile-card-footer">
             <div><strong>10+ years</strong><span>Enterprise engineering</span></div>
