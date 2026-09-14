@@ -5,6 +5,9 @@ compatibility_date = "2025-07-01"
 # nodejs_compat lets the Anthropic SDK run on the Workers runtime.
 compatibility_flags = ["nodejs_compat"]
 
+[build]
+command = "node ../scripts/gen-resume-context.mjs"
+
 # API keys are secrets, NOT stored here. Set them once with:
 #   cd worker && npx wrangler secret put ANTHROPIC_API_KEY
 #   (create the key at https://console.anthropic.com/settings/keys)

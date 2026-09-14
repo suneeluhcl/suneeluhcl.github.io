@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { loadEnv } from "vite";
 
 /**
  * Guards the static-HTML build (scripts/prerender.js). These run against the
@@ -72,5 +73,16 @@ test("hydrates without React errors or mismatches", async ({ page }) => {
 
   expect(errors, `console errors during hydration:\n${errors.join("\n")}`).toHaveLength(0);
   await page.getByLabel("Ask my résumé", { exact: true }).click();
-  await expect(page.getByRole("link", { name: "Read my current résumé" })).toHaveAttribute("href", "/resume/");
+  const config = loadEnv("production", process.cwd(), "VITE_");
+  if (config.VITE_RESUME_ASSISTANT_ENABLED === "true") {
+    await page.route(config.VITE_CHAT_API_URL, route => route.fulfill({
+      status: 200, headers: { "content-type": "text/event-stream" },
+      body: 'data: {"response":"Suneel built reusable AI agent skills at Capital One."}\n\ndata: [DONE]\n\n',
+    }));
+    await page.getByRole("textbox", { name: "Your question" }).fill("What AI work did he do?");
+    await page.getByRole("button", { name: "Send", exact: true }).click();
+    await expect(page.getByText("Suneel built reusable AI agent skills at Capital One.")).toBeVisible();
+  } else {
+    await expect(page.getByRole("link", { name: "Read my current résumé" })).toHaveAttribute("href", "/resume/");
+  }
 });
