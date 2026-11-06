@@ -19,7 +19,7 @@ export const availability = {
 
 export const about = [
   "I'm a senior full-stack developer with 10+ years delivering Java, Spring Boot, React, and Python solutions across the software lifecycle. Recent work includes secure integration of LLM APIs, retrieval-augmented generation, embeddings, and vector search.",
-  "My foundation is modern Java: I've migrated applications from Java 8 to 17, upgraded Spring Boot to 3.x, and helped move monoliths into microservices with Spring Security, Spring Data JPA, and AWS-hosted services.",
+  "My foundation is modern Java: I've migrated applications from Java 8 to 17, upgraded Spring Boot from 3.x to 4.x, and helped move monoliths into microservices with Spring Security, Spring Data JPA, and AWS-hosted services.",
   "On the front end, I build React 18 and Angular applications with TypeScript, hooks, state management, and secure token-based APIs. On the data side, I use Python with FastAPI, Flask, and Pandas for automation, data processing, and AI services.",
   "For AI, I've integrated LangChain, LLM APIs, embeddings, vector databases, RAG, prompt engineering, response guardrails, and model-output evaluation. I also hold AWS Solutions Architect – Professional and Google Cloud Professional Machine Learning Engineer certifications.",
 ];
@@ -34,7 +34,7 @@ export const skillCategories = [
     title: "Backend",
     icon: "Layers",
     items: [
-      "Spring Boot 2.x/3.x", "Spring MVC", "Spring Security", "Spring Data JPA",
+      "Spring Boot 2.x–4.x", "Spring MVC", "Spring Security", "Spring Data JPA",
       "Spring Cloud", "Spring Batch", "Hibernate/JPA", "JMS", "ActiveMQ",
       "RESTful APIs", "Swagger/OpenAPI", "Microservices",
     ],
@@ -106,10 +106,10 @@ export const experience = [
     title: "Senior Java Full Stack Developer",
     dates: "Nov 2023 – Present · Assignment ending soon",
     current: true,
-    focus: "Java 17 · Spring Boot 3 · React 18 · GenAI/RAG · AWS",
-    stack: ["Java 17", "Spring Boot 3.x", "React 18", "Angular 11", "Python / FastAPI", "LangChain", "RAG", "AWS", "Docker", "Jenkins"],
+    focus: "Java 17 · Spring Boot 3/4 · React 18 · GenAI/RAG · AWS",
+    stack: ["Java 17", "Spring Boot 3.x/4.x", "React 18", "Angular 11", "Python / FastAPI", "LangChain", "RAG", "AWS", "Docker", "Jenkins"],
     bullets: [
-      "Led the migration of backend services from Java 8 to Java 17 and upgraded Spring Boot applications to Spring Boot 3.x and Spring Framework 6.",
+      "Led the migration of backend services from Java 8 to Java 17 and upgraded Spring Boot applications from 3.x to 4.x.",
       "Built secure RESTful services with Spring Boot, Spring Security, OAuth 2.1, and JWT, and built React 18 and Angular 11 interfaces that consume those APIs.",
       "Integrated GenAI into customer-support and operational workflows using LangChain, LLM APIs, embeddings, vector search, and retrieval-augmented generation.",
       "Implemented prompt templates, context management, response guardrails, PII filtering, and automated evaluation for GenAI services.",
@@ -120,7 +120,7 @@ export const experience = [
       "Wrote unit and integration tests with JUnit and Mockito, and enforced code quality with SonarQube.",
     ],
     environment:
-      "Java 17, Spring Boot 3.x, Spring MVC 6, Spring Security, OAuth 2.1, JWT, Spring Data JPA, Angular 11, React 18, TypeScript, REST, SOAP, Apache CXF, JAXB, Oracle 19c, IBM DB2, Docker, Tomcat, Jenkins, Maven, JUnit, Mockito, Log4j2, SonarQube, GitHub, JIRA, AWS (EC2, S3, RDS, IAM, VPC, Lambda, SQS, SNS, Route 53, CloudWatch), Python, FastAPI, Flask, Pandas, LangChain, LLM APIs, RAG, embeddings, vector databases, prompt engineering",
+      "Java 17, Spring Boot 3.x/4.x, Spring MVC, Spring Security, OAuth 2.1, JWT, Spring Data JPA, Angular 11, React 18, TypeScript, REST, SOAP, Apache CXF, JAXB, Oracle 19c, IBM DB2, Docker, Tomcat, Jenkins, Maven, JUnit, Mockito, Log4j2, SonarQube, GitHub, JIRA, AWS (EC2, S3, RDS, IAM, VPC, Lambda, SQS, SNS, Route 53, CloudWatch), Python, FastAPI, Flask, Pandas, LangChain, LLM APIs, RAG, embeddings, vector databases, prompt engineering",
   },
   {
     company: "Fidelity Investments",
@@ -252,11 +252,11 @@ export const projects = [
     title: "Payments Fulfillment Platform",
     org: "Capital One",
     tagline:
-      "A large-scale payment fulfillment system built with Java 17, Spring Boot 3, and secure APIs.",
-    stack: ["Java 17", "Spring Boot 3.x", "React 18", "Spring Security", "OAuth2", "JWT", "AWS", "Docker", "Jenkins"],
+      "A large-scale payment fulfillment system built with Java 17, Spring Boot 3.x/4.x, and secure APIs.",
+    stack: ["Java 17", "Spring Boot 3.x/4.x", "React 18", "Spring Security", "OAuth2", "JWT", "AWS", "Docker", "Jenkins"],
     highlights: [
-      "Built secure RESTful APIs with Spring Boot 3.x and Spring Security, including OAuth 2.1 and JWT-based access.",
-      "Integrated Java 8 to 17 migration and Spring Boot 3 upgrades across the platform.",
+      "Built secure RESTful APIs with Spring Boot 3.x/4.x and Spring Security, including OAuth 2.1 and JWT-based access.",
+      "Integrated Java 8 to 17 migration and Spring Boot 3.x to 4.x upgrades across the platform.",
       "Built React 18 interfaces with TypeScript, hooks, and secured API communication.",
     ],
   },
@@ -273,14 +273,14 @@ export const projects = [
     ],
   },
   {
-    title: "Java 17 and Spring Boot 3 Modernization",
+    title: "Java 17 and Spring Boot Modernization",
     org: "Capital One",
     tagline:
       "Modernized backend services and upgraded the application stack while reducing legacy dependencies.",
-    stack: ["Java 17", "Spring Boot 3.x", "Spring Framework 6", "Jakarta EE 10", "Docker", "Jenkins"],
+    stack: ["Java 17", "Spring Boot 3.x/4.x", "Docker", "Jenkins"],
     highlights: [
       "Migrated services from Java 8 to Java 17 and adopted records, sealed classes, and switch expressions.",
-      "Upgraded Spring Boot applications to Spring Boot 3.x and Spring Framework 6 with Jakarta EE 10 namespaces.",
+      "Upgraded Spring Boot applications from 3.x to 4.x while maintaining backward compatibility for existing services.",
       "Containerized services with Docker and upgraded Jenkins pipelines for Java 17 build targets.",
     ],
   },
