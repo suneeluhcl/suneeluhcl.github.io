@@ -103,8 +103,8 @@ export const experience = [
   {
     company: "Capital One",
     location: "Richmond, VA",
-    title: "Sr. Java Full Stack Developer",
-    dates: "Nov 2023 – Present",
+    title: "Senior Java Full Stack Developer",
+    dates: "Nov 2023 – Present · Assignment ending soon",
     current: true,
     focus: "Java 17 · Spring Boot 3 · React 18 · GenAI/RAG · AWS",
     stack: ["Java 17", "Spring Boot 3.x", "React 18", "Angular 11", "Python / FastAPI", "LangChain", "RAG", "AWS", "Docker", "Jenkins"],
@@ -145,7 +145,7 @@ export const experience = [
   {
     company: "Capital One",
     location: "Richmond, VA",
-    title: "Sr. Java Full Stack Developer",
+    title: "Senior Java Full Stack Developer",
     dates: "Aug 2021 – Apr 2022",
     focus: "Java 8 · Spring Boot 2 · Angular 8 · AWS",
     stack: ["Java 8", "Spring Boot 2.x", "Angular 8", "Hibernate 5.x", "Docker", "Jenkins", "AWS"],
@@ -200,7 +200,7 @@ export const experience = [
   {
     company: "Teleflora",
     location: "Oklahoma City, OK",
-    title: "Sr. Java Developer",
+    title: "Senior Java Developer",
     dates: "Mar 2017 – Jun 2018",
     focus: "Enterprise Java · Spring · Hibernate · SOAP/REST",
     stack: ["Java 7/8", "Spring 3.0", "Hibernate 3.5", "JSF 2.0", "PrimeFaces", "WebSphere 8.1"],
@@ -321,7 +321,7 @@ export const projects = [
     ],
   },
   {
-    title: "AI Skills and Operations Automation",
+    title: "AI Skills & Operations Automation",
     org: "Capital One",
     tagline:
       "Production AI tooling that supports operational decisions and engineering automation.",
